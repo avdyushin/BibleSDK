@@ -9,7 +9,7 @@
 import SQLite3
 import Foundation
 
-public struct Row {
+struct Row {
     let values: [String: AnyObject]
     subscript<T>(name: String) -> T? {
         return values[name] as? T
@@ -19,11 +19,11 @@ public struct Row {
     }
 }
 
-public protocol Storage {
+protocol Storage {
     func fetch(_ statement: String) throws -> [Row]
 }
 
-public protocol AsyncStorage: Storage {
+protocol AsyncStorage: Storage {
     @discardableResult
     func execute(_ statement: String, block: @escaping ([Row]) -> Void) throws -> Operation
 }
