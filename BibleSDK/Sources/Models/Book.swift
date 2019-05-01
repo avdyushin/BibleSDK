@@ -14,4 +14,5 @@ public struct Book: Hashable, Equatable {
     public let title: String
     public let alt: String
     public let abbr: String
+    public var chaptersCount: UInt
 }

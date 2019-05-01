@@ -10,24 +10,24 @@ import XCTest
 
 class BibleSDK_iOS_Tests: XCTestCase {
 
+    var bible: Bible!
+
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        bible = Bible()
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        bible = nil
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testLoadNoThrow() {
+        let path = Bundle(for: type(of: self)).path(forResource: "rst", ofType: "db")!
+        XCTAssertNoThrow(try bible.load(path: path))
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testLoadThrow() {
+        XCTAssertThrowsError(try bible.load(path: "no-data-base"))
     }
-
 }

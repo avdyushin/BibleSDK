@@ -33,6 +33,13 @@
 		4BC6D881227A12C700FF0A03 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D87F227A12C700FF0A03 /* Book.swift */; };
 		4BC6D883227A148700FF0A03 /* AbbriviationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D882227A148700FF0A03 /* AbbriviationTests.swift */; };
 		4BC6D885227A157100FF0A03 /* RegexTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D884227A157100FF0A03 /* RegexTest.swift */; };
+		4BC6D887227A1A0300FF0A03 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D886227A1A0300FF0A03 /* Storage.swift */; };
+		4BC6D888227A1A0300FF0A03 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D886227A1A0300FF0A03 /* Storage.swift */; };
+		4BC6D88A227A1A3500FF0A03 /* StorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D889227A1A3500FF0A03 /* StorageTest.swift */; };
+		4BC6D88D227A1AE700FF0A03 /* rst.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D88C227A1AE700FF0A03 /* rst.db */; };
+		4BC6D88F227A1E2B00FF0A03 /* BookProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D88E227A1E2B00FF0A03 /* BookProvider.swift */; };
+		4BC6D890227A1E2B00FF0A03 /* BookProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D88E227A1E2B00FF0A03 /* BookProvider.swift */; };
+		4BC6D892227A1F5300FF0A03 /* BookProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D891227A1F5300FF0A03 /* BookProviderTest.swift */; };
 		4BECEC202278996100151F74 /* BibleSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BECEC1E2278996100151F74 /* BibleSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -81,6 +88,11 @@
 		4BC6D87F227A12C700FF0A03 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		4BC6D882227A148700FF0A03 /* AbbriviationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbbriviationTests.swift; sourceTree = "<group>"; };
 		4BC6D884227A157100FF0A03 /* RegexTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexTest.swift; sourceTree = "<group>"; };
+		4BC6D886227A1A0300FF0A03 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		4BC6D889227A1A3500FF0A03 /* StorageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageTest.swift; sourceTree = "<group>"; };
+		4BC6D88C227A1AE700FF0A03 /* rst.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = rst.db; sourceTree = "<group>"; };
+		4BC6D88E227A1E2B00FF0A03 /* BookProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookProvider.swift; sourceTree = "<group>"; };
+		4BC6D891227A1F5300FF0A03 /* BookProviderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookProviderTest.swift; sourceTree = "<group>"; };
 		4BECEC1B2278996100151F74 /* BibleSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BibleSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BECEC1E2278996100151F74 /* BibleSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BibleSDK.h; sourceTree = "<group>"; };
 		4BECEC292278997500151F74 /* BibleSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BibleSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,8 +159,11 @@
 		4BC6D82F2279958800FF0A03 /* BibleSDK iOS Tests */ = {
 			isa = PBXGroup;
 			children = (
+				4BC6D88B227A1AC900FF0A03 /* Resources */,
 				4BC6D884227A157100FF0A03 /* RegexTest.swift */,
 				4BC6D882227A148700FF0A03 /* AbbriviationTests.swift */,
+				4BC6D889227A1A3500FF0A03 /* StorageTest.swift */,
+				4BC6D891227A1F5300FF0A03 /* BookProviderTest.swift */,
 				4BC6D8302279958800FF0A03 /* BibleSDK_iOS_Tests.swift */,
 				4BC6D8322279958800FF0A03 /* Info.plist */,
 			);
@@ -195,6 +210,8 @@
 			children = (
 				4BC6D874227A0C2400FF0A03 /* Regex.swift */,
 				4BC6D879227A11C000FF0A03 /* Abbreviation.swift */,
+				4BC6D886227A1A0300FF0A03 /* Storage.swift */,
+				4BC6D88E227A1E2B00FF0A03 /* BookProvider.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -206,6 +223,14 @@
 				4BC6D87F227A12C700FF0A03 /* Book.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4BC6D88B227A1AC900FF0A03 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4BC6D88C227A1AE700FF0A03 /* rst.db */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		4BECEC0F2278991800151F74 = {
@@ -430,6 +455,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BC6D88D227A1AE700FF0A03 /* rst.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +507,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BC6D885227A157100FF0A03 /* RegexTest.swift in Sources */,
+				4BC6D88A227A1A3500FF0A03 /* StorageTest.swift in Sources */,
 				4BC6D8312279958800FF0A03 /* BibleSDK_iOS_Tests.swift in Sources */,
+				4BC6D892227A1F5300FF0A03 /* BookProviderTest.swift in Sources */,
 				4BC6D883227A148700FF0A03 /* AbbriviationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,7 +548,9 @@
 				4BC6D87A227A11C000FF0A03 /* Abbreviation.swift in Sources */,
 				4BC6D875227A0C2400FF0A03 /* Regex.swift in Sources */,
 				4BC6D880227A12C700FF0A03 /* Book.swift in Sources */,
+				4BC6D88F227A1E2B00FF0A03 /* BookProvider.swift in Sources */,
 				4BC6D87D227A120100FF0A03 /* Verse.swift in Sources */,
+				4BC6D887227A1A0300FF0A03 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,7 +562,9 @@
 				4BC6D87B227A11C000FF0A03 /* Abbreviation.swift in Sources */,
 				4BC6D876227A0C2400FF0A03 /* Regex.swift in Sources */,
 				4BC6D881227A12C700FF0A03 /* Book.swift in Sources */,
+				4BC6D890227A1E2B00FF0A03 /* BookProvider.swift in Sources */,
 				4BC6D87E227A120100FF0A03 /* Verse.swift in Sources */,
+				4BC6D888227A1A0300FF0A03 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
