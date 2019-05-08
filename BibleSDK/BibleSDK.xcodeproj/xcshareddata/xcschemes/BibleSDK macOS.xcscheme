@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4BECEC1A2278996100151F74"
+               BlueprintIdentifier = "4BECEC282278997500151F74"
                BuildableName = "BibleSDK.framework"
-               BlueprintName = "BibleSDK iOS"
+               BlueprintName = "BibleSDK macOS"
                ReferencedContainer = "container:BibleSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4BC6D8522279963E00FF0A03"
+               BuildableName = "BibleSDK macOS Tests.xctest"
+               BlueprintName = "BibleSDK macOS Tests"
+               ReferencedContainer = "container:BibleSDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "4BECEC282278997500151F74"
+            BuildableName = "BibleSDK.framework"
+            BlueprintName = "BibleSDK macOS"
+            ReferencedContainer = "container:BibleSDK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4BECEC1A2278996100151F74"
+            BlueprintIdentifier = "4BECEC282278997500151F74"
             BuildableName = "BibleSDK.framework"
-            BlueprintName = "BibleSDK iOS"
+            BlueprintName = "BibleSDK macOS"
             ReferencedContainer = "container:BibleSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4BECEC1A2278996100151F74"
+            BlueprintIdentifier = "4BECEC282278997500151F74"
             BuildableName = "BibleSDK.framework"
-            BlueprintName = "BibleSDK iOS"
+            BlueprintName = "BibleSDK macOS"
             ReferencedContainer = "container:BibleSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

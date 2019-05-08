@@ -142,7 +142,7 @@ struct BookProvider {
             debugPrint("No rows for \(query) returned!")
             return 0
         }
-        let count: Int = row?["COUNT(*)"] ?? 0
+        let count: Int = row["COUNT(*)"] ?? 0
         return count
     }
 

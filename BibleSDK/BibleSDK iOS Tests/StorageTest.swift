@@ -67,7 +67,7 @@ class StorageTest: XCTestCase {
 
     func testCount() {
         let row = try? storage.fetch("select COUNT(*) from rst_bible_books").first
-        let count: Int = row??["COUNT(*)"] ?? 0
+        let count: Int = row?["COUNT(*)"] ?? 0
         XCTAssertEqual(count, 66)
     }
 
