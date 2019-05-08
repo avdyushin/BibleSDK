@@ -36,10 +36,27 @@
 		4BC6D887227A1A0300FF0A03 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D886227A1A0300FF0A03 /* Storage.swift */; };
 		4BC6D888227A1A0300FF0A03 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D886227A1A0300FF0A03 /* Storage.swift */; };
 		4BC6D88A227A1A3500FF0A03 /* StorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D889227A1A3500FF0A03 /* StorageTest.swift */; };
-		4BC6D88D227A1AE700FF0A03 /* rst.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D88C227A1AE700FF0A03 /* rst.db */; };
 		4BC6D88F227A1E2B00FF0A03 /* BookProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D88E227A1E2B00FF0A03 /* BookProvider.swift */; };
 		4BC6D890227A1E2B00FF0A03 /* BookProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D88E227A1E2B00FF0A03 /* BookProvider.swift */; };
 		4BC6D892227A1F5300FF0A03 /* BookProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D891227A1F5300FF0A03 /* BookProviderTest.swift */; };
+		4BC6D8A52283019600FF0A03 /* kjv_daily.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A22283019600FF0A03 /* kjv_daily.db */; };
+		4BC6D8A62283019600FF0A03 /* kjv_daily.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A22283019600FF0A03 /* kjv_daily.db */; };
+		4BC6D8A72283019600FF0A03 /* kjv_daily.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A22283019600FF0A03 /* kjv_daily.db */; };
+		4BC6D8A82283019600FF0A03 /* kjv_daily.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A22283019600FF0A03 /* kjv_daily.db */; };
+		4BC6D8A92283019600FF0A03 /* kjv_daily.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A22283019600FF0A03 /* kjv_daily.db */; };
+		4BC6D8AA2283019600FF0A03 /* kjv_daily.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A22283019600FF0A03 /* kjv_daily.db */; };
+		4BC6D8AB2283019600FF0A03 /* kjv.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A32283019600FF0A03 /* kjv.db */; };
+		4BC6D8AC2283019600FF0A03 /* kjv.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A32283019600FF0A03 /* kjv.db */; };
+		4BC6D8AD2283019600FF0A03 /* kjv.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A32283019600FF0A03 /* kjv.db */; };
+		4BC6D8AE2283019600FF0A03 /* kjv.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A32283019600FF0A03 /* kjv.db */; };
+		4BC6D8AF2283019600FF0A03 /* kjv.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A32283019600FF0A03 /* kjv.db */; };
+		4BC6D8B02283019600FF0A03 /* kjv.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A32283019600FF0A03 /* kjv.db */; };
+		4BC6D8B12283019600FF0A03 /* rst.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A42283019600FF0A03 /* rst.db */; };
+		4BC6D8B22283019600FF0A03 /* rst.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A42283019600FF0A03 /* rst.db */; };
+		4BC6D8B32283019600FF0A03 /* rst.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A42283019600FF0A03 /* rst.db */; };
+		4BC6D8B42283019600FF0A03 /* rst.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A42283019600FF0A03 /* rst.db */; };
+		4BC6D8B52283019600FF0A03 /* rst.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A42283019600FF0A03 /* rst.db */; };
+		4BC6D8B62283019600FF0A03 /* rst.db in Resources */ = {isa = PBXBuildFile; fileRef = 4BC6D8A42283019600FF0A03 /* rst.db */; };
 		4BECEC202278996100151F74 /* BibleSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BECEC1E2278996100151F74 /* BibleSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -90,9 +107,11 @@
 		4BC6D884227A157100FF0A03 /* RegexTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexTest.swift; sourceTree = "<group>"; };
 		4BC6D886227A1A0300FF0A03 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		4BC6D889227A1A3500FF0A03 /* StorageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageTest.swift; sourceTree = "<group>"; };
-		4BC6D88C227A1AE700FF0A03 /* rst.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = rst.db; sourceTree = "<group>"; };
 		4BC6D88E227A1E2B00FF0A03 /* BookProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookProvider.swift; sourceTree = "<group>"; };
 		4BC6D891227A1F5300FF0A03 /* BookProviderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookProviderTest.swift; sourceTree = "<group>"; };
+		4BC6D8A22283019600FF0A03 /* kjv_daily.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = kjv_daily.db; sourceTree = "<group>"; };
+		4BC6D8A32283019600FF0A03 /* kjv.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = kjv.db; sourceTree = "<group>"; };
+		4BC6D8A42283019600FF0A03 /* rst.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = rst.db; sourceTree = "<group>"; };
 		4BECEC1B2278996100151F74 /* BibleSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BibleSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BECEC1E2278996100151F74 /* BibleSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BibleSDK.h; sourceTree = "<group>"; };
 		4BECEC292278997500151F74 /* BibleSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BibleSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,7 +178,6 @@
 		4BC6D82F2279958800FF0A03 /* BibleSDK iOS Tests */ = {
 			isa = PBXGroup;
 			children = (
-				4BC6D88B227A1AC900FF0A03 /* Resources */,
 				4BC6D884227A157100FF0A03 /* RegexTest.swift */,
 				4BC6D882227A148700FF0A03 /* AbbriviationTests.swift */,
 				4BC6D889227A1A3500FF0A03 /* StorageTest.swift */,
@@ -225,12 +243,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		4BC6D88B227A1AC900FF0A03 /* Resources */ = {
+		4BC6D8A12283003000FF0A03 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				4BC6D88C227A1AE700FF0A03 /* rst.db */,
+				4BC6D8A22283019600FF0A03 /* kjv_daily.db */,
+				4BC6D8A32283019600FF0A03 /* kjv.db */,
+				4BC6D8A42283019600FF0A03 /* rst.db */,
 			);
-			path = Resources;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		4BECEC0F2278991800151F74 = {
@@ -262,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				4BC6D82922789E5B00FF0A03 /* Supporting Files */,
+				4BC6D8A12283003000FF0A03 /* Data */,
 				4BC6D878227A119600FF0A03 /* Models */,
 				4BC6D873227A0C0A00FF0A03 /* Utilities */,
 				4BC6D82522789C6400FF0A03 /* Main.swift */,
@@ -455,7 +476,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BC6D88D227A1AE700FF0A03 /* rst.db in Resources */,
+				4BC6D8AD2283019600FF0A03 /* kjv.db in Resources */,
+				4BC6D8A72283019600FF0A03 /* kjv_daily.db in Resources */,
+				4BC6D8B32283019600FF0A03 /* rst.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,9 +486,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BC6D8AE2283019600FF0A03 /* kjv.db in Resources */,
 				4BC6D84A2279961B00FF0A03 /* LaunchScreen.storyboard in Resources */,
+				4BC6D8A82283019600FF0A03 /* kjv_daily.db in Resources */,
 				4BC6D8472279961B00FF0A03 /* Assets.xcassets in Resources */,
 				4BC6D8452279961700FF0A03 /* Main.storyboard in Resources */,
+				4BC6D8B42283019600FF0A03 /* rst.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +499,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BC6D8A92283019600FF0A03 /* kjv_daily.db in Resources */,
+				4BC6D8AF2283019600FF0A03 /* kjv.db in Resources */,
+				4BC6D8B52283019600FF0A03 /* rst.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +509,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BC6D8B62283019600FF0A03 /* rst.db in Resources */,
+				4BC6D8AA2283019600FF0A03 /* kjv_daily.db in Resources */,
+				4BC6D8B02283019600FF0A03 /* kjv.db in Resources */,
 				4BC6D8692279965D00FF0A03 /* Assets.xcassets in Resources */,
 				4BC6D86C2279965D00FF0A03 /* Main.storyboard in Resources */,
 			);
@@ -489,6 +521,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BC6D8A52283019600FF0A03 /* kjv_daily.db in Resources */,
+				4BC6D8AB2283019600FF0A03 /* kjv.db in Resources */,
+				4BC6D8B12283019600FF0A03 /* rst.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +531,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BC6D8A62283019600FF0A03 /* kjv_daily.db in Resources */,
+				4BC6D8AC2283019600FF0A03 /* kjv.db in Resources */,
+				4BC6D8B22283019600FF0A03 /* rst.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
