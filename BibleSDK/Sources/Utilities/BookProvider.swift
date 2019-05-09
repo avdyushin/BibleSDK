@@ -16,7 +16,7 @@ struct BookProvider {
         let query =
         """
         SELECT
-            id, book as title, alt, abbr
+            id, idx, book as title, alt, abbr
         FROM
             rst_bible_books
         WHERE
@@ -31,7 +31,7 @@ struct BookProvider {
         }
 
         return rows.map { data in
-            Book(id: data["id"]!, title: data["title"]!, alt: data["alt"]!, abbr: data["abbr"]!, chaptersCount: 0)
+            Book(id: data["id"]!, index: data["idx"]!, title: data["title"]!, alt: data["alt"]!, abbr: data["abbr"]!, chaptersCount: 0)
         }.first
     }
 
@@ -50,7 +50,7 @@ struct BookProvider {
         let query =
         """
         SELECT
-            id, book as title, alt, abbr
+            id, idx, book as title, alt, abbr
         FROM
             rst_bible_books
         WHERE
@@ -64,7 +64,7 @@ struct BookProvider {
         }
 
         return rows.map { data in
-            Book(id: data["id"]!, title: data["title"]!, alt: data["alt"]!, abbr: data["abbr"]!, chaptersCount: 0)
+            Book(id: data["id"]!, index: data["idx"]!, title: data["title"]!, alt: data["alt"]!, abbr: data["abbr"]!, chaptersCount: 0)
         }
     }
 
@@ -72,7 +72,7 @@ struct BookProvider {
         let query =
         """
         SELECT
-            rst_bible_books.id, rst_bible_books.book as title, rst_bible_books.alt, rst_bible_books.abbr,
+            rst_bible_books.id, rst_bible_books.idx, rst_bible_books.book as title, rst_bible_books.alt, rst_bible_books.abbr,
             (SELECT COUNT(DISTINCT rst_bible.chapter) FROM rst_bible WHERE rst_bible.book_id = rst_bible_books.id) AS chapters
         FROM rst_bible_books;
         """
@@ -82,7 +82,7 @@ struct BookProvider {
         }
 
         return rows.compactMap { data in
-            Book(id: data["id"]!, title: data["title"]!, alt: data["alt"]!, abbr: data["abbr"]!, chaptersCount: data["chapters"]!)
+            Book(id: data["id"]!, index: data["idx"]!, title: data["title"]!, alt: data["alt"]!, abbr: data["abbr"]!, chaptersCount: data["chapters"]!)
         }
     }
 
@@ -102,7 +102,7 @@ struct BookProvider {
             return []
         }
         return rows.compactMap { data in
-            Verse(book: book, chapter: data["chapter"]!, number: data["verse"]!, text: data["text"]!)
+            Verse(book: book.id, chapter: data["chapter"]!, number: data["verse"]!, text: data["text"]!)
         }
     }
 
@@ -172,7 +172,7 @@ struct BookProvider {
                 debugPrint("No book was found for: \(data)")
                 return nil
             }
-            return Verse(book: book, chapter: data["chapter"]!, number: data["verse"]!, text: data["text"]!)
+            return Verse(book: book.id, chapter: data["chapter"]!, number: data["verse"]!, text: data["text"]!)
         }
     }
 
@@ -206,7 +206,7 @@ struct BookProvider {
             return []
         }
         return rows.compactMap { data in
-            Verse(book: book, chapter: chapter, number: data["verse"]!, text: data["text"]!)
+            Verse(book: book.id, chapter: chapter, number: data["verse"]!, text: data["text"]!)
         }
     }
 
@@ -225,7 +225,7 @@ struct BookProvider {
             return []
         }
         return rows.compactMap { data in
-            Verse(book: book, chapter: data["chapter"]!, number: data["verse"]!, text: data["text"]!)
+            Verse(book: book.id, chapter: data["chapter"]!, number: data["verse"]!, text: data["text"]!)
         }
     }
 

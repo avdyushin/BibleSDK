@@ -5,10 +5,17 @@
 //  Created by Grigory Avdyushin on 30/04/2019.
 //
 
-public class Bible {
+public class BibleSDK {
 
     var bookProvider: BookProvider?
     let abbreviation = try! BibleAbbreviation()
+
+    // show list of installed versions
+    // load version
+
+    // get books list (for version)
+    // get texts by string ref (interate all versions?)
+    // get texts by ref (for version)
 
     public func load(path: String) throws {
         guard FileManager.default.fileExists(atPath: path) else {
@@ -19,7 +26,7 @@ public class Bible {
         bookProvider = BookProvider(storage: storage)
     }
 
-    public func findVerses(by string: String) -> [Verse] {
+    public func findByReference(_ string: String) -> [Verse] {
         precondition(!string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 
         guard let provider = bookProvider else {
@@ -28,7 +35,7 @@ public class Bible {
 
         return abbreviation
             .matches(string) // String -> RawReference
-            .reduce([], { $0.contains($1) ? $0 : $0 + [$1 ] }) // Ignore duplicates
+            //.reduce([], { $0.contains($1) ? $0 : $0 + [$1] }) // Ignore duplicates
             .compactMap { provider.findBookReference(by: $0) } // -> Reference
             .flatMap { provider.findVerses(by: $0) } // -> Verses
     }

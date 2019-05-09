@@ -10,20 +10,30 @@ import Foundation
 
 public struct Verse: Hashable, Equatable {
 
-    public typealias BookId = Int
     public typealias ChapterIndex = Int
     public typealias VerseIndex = Int
 
-    public let book: Book
+    public let book: Book.BookId
     public let chapter: ChapterIndex
     public let number: VerseIndex
     public let text: String
 
-    init(book: Book, chapter: ChapterIndex, number: VerseIndex, text: String) {
+    init(book: Book.BookId, chapter: ChapterIndex, number: VerseIndex, text: String) {
         self.book = book
         self.chapter = chapter
         self.number = number
         self.text = text
+    }
+}
+
+extension Verse {
+    init(row: Row) {
+        self.init(
+            book: row["book_id"]!,
+            chapter: row["chapter"]!,
+            number: row["verse"]!,
+            text: row["text"]!
+        )
     }
 }
 

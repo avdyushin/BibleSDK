@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B8AFF8122849C5B00D55F7D /* BibleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */; };
+		4B8AFF8222849C5B00D55F7D /* BibleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */; };
+		4B8AFF8422849CB100D55F7D /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8322849CB100D55F7D /* Container.swift */; };
+		4B8AFF8522849CB100D55F7D /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8322849CB100D55F7D /* Container.swift */; };
+		4B8AFF8722849D3200D55F7D /* BookContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8622849D3200D55F7D /* BookContainer.swift */; };
+		4B8AFF8822849D3200D55F7D /* BookContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8622849D3200D55F7D /* BookContainer.swift */; };
+		4B8AFF8A22849D8000D55F7D /* Bible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8922849D8000D55F7D /* Bible.swift */; };
+		4B8AFF8B22849D8000D55F7D /* Bible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8922849D8000D55F7D /* Bible.swift */; };
+		4B8AFF8D2284A0CE00D55F7D /* BibleContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8C2284A0CE00D55F7D /* BibleContainerTests.swift */; };
 		4BC6D82222789C0100FF0A03 /* BibleSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BECEC1E2278996100151F74 /* BibleSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BC6D82622789C6400FF0A03 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D82522789C6400FF0A03 /* Main.swift */; };
 		4BC6D82722789C6700FF0A03 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC6D82522789C6400FF0A03 /* Main.swift */; };
@@ -78,6 +87,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleContainer.swift; sourceTree = "<group>"; };
+		4B8AFF8322849CB100D55F7D /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		4B8AFF8622849D3200D55F7D /* BookContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookContainer.swift; sourceTree = "<group>"; };
+		4B8AFF8922849D8000D55F7D /* Bible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bible.swift; sourceTree = "<group>"; };
+		4B8AFF8C2284A0CE00D55F7D /* BibleContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleContainerTests.swift; sourceTree = "<group>"; };
 		4BC6D82522789C6400FF0A03 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		4BC6D82E2279958800FF0A03 /* BibleSDK iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BibleSDK iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BC6D8302279958800FF0A03 /* BibleSDK_iOS_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleSDK_iOS_Tests.swift; sourceTree = "<group>"; };
@@ -182,6 +196,7 @@
 				4BC6D882227A148700FF0A03 /* AbbriviationTests.swift */,
 				4BC6D889227A1A3500FF0A03 /* StorageTest.swift */,
 				4BC6D891227A1F5300FF0A03 /* BookProviderTest.swift */,
+				4B8AFF8C2284A0CE00D55F7D /* BibleContainerTests.swift */,
 				4BC6D8302279958800FF0A03 /* BibleSDK_iOS_Tests.swift */,
 				4BC6D8322279958800FF0A03 /* Info.plist */,
 			);
@@ -230,6 +245,9 @@
 				4BC6D879227A11C000FF0A03 /* Abbreviation.swift */,
 				4BC6D886227A1A0300FF0A03 /* Storage.swift */,
 				4BC6D88E227A1E2B00FF0A03 /* BookProvider.swift */,
+				4B8AFF8322849CB100D55F7D /* Container.swift */,
+				4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */,
+				4B8AFF8622849D3200D55F7D /* BookContainer.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -239,6 +257,7 @@
 			children = (
 				4BC6D87C227A120100FF0A03 /* Verse.swift */,
 				4BC6D87F227A12C700FF0A03 /* Book.swift */,
+				4B8AFF8922849D8000D55F7D /* Bible.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -553,6 +572,7 @@
 				4BC6D88A227A1A3500FF0A03 /* StorageTest.swift in Sources */,
 				4BC6D8312279958800FF0A03 /* BibleSDK_iOS_Tests.swift in Sources */,
 				4BC6D892227A1F5300FF0A03 /* BookProviderTest.swift in Sources */,
+				4B8AFF8D2284A0CE00D55F7D /* BibleContainerTests.swift in Sources */,
 				4BC6D883227A148700FF0A03 /* AbbriviationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,12 +607,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B8AFF8122849C5B00D55F7D /* BibleContainer.swift in Sources */,
 				4BC6D82622789C6400FF0A03 /* Main.swift in Sources */,
+				4B8AFF8722849D3200D55F7D /* BookContainer.swift in Sources */,
 				4BC6D87A227A11C000FF0A03 /* Abbreviation.swift in Sources */,
 				4BC6D875227A0C2400FF0A03 /* Regex.swift in Sources */,
 				4BC6D880227A12C700FF0A03 /* Book.swift in Sources */,
 				4BC6D88F227A1E2B00FF0A03 /* BookProvider.swift in Sources */,
 				4BC6D87D227A120100FF0A03 /* Verse.swift in Sources */,
+				4B8AFF8422849CB100D55F7D /* Container.swift in Sources */,
+				4B8AFF8A22849D8000D55F7D /* Bible.swift in Sources */,
 				4BC6D887227A1A0300FF0A03 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -601,12 +625,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B8AFF8222849C5B00D55F7D /* BibleContainer.swift in Sources */,
 				4BC6D82722789C6700FF0A03 /* Main.swift in Sources */,
+				4B8AFF8822849D3200D55F7D /* BookContainer.swift in Sources */,
 				4BC6D87B227A11C000FF0A03 /* Abbreviation.swift in Sources */,
 				4BC6D876227A0C2400FF0A03 /* Regex.swift in Sources */,
 				4BC6D881227A12C700FF0A03 /* Book.swift in Sources */,
 				4BC6D890227A1E2B00FF0A03 /* BookProvider.swift in Sources */,
 				4BC6D87E227A120100FF0A03 /* Verse.swift in Sources */,
+				4B8AFF8522849CB100D55F7D /* Container.swift in Sources */,
+				4B8AFF8B22849D8000D55F7D /* Bible.swift in Sources */,
 				4BC6D888227A1A0300FF0A03 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
