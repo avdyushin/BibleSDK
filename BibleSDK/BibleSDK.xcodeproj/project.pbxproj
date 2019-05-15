@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B0871B6228C6F1C00621C5E /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0871B5228C6F1C00621C5E /* Version.swift */; };
+		4B0871B7228C6F1C00621C5E /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0871B5228C6F1C00621C5E /* Version.swift */; };
 		4B8AFF8122849C5B00D55F7D /* BibleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */; };
 		4B8AFF8222849C5B00D55F7D /* BibleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */; };
 		4B8AFF8422849CB100D55F7D /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8322849CB100D55F7D /* Container.swift */; };
@@ -87,6 +89,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B0871B5228C6F1C00621C5E /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleContainer.swift; sourceTree = "<group>"; };
 		4B8AFF8322849CB100D55F7D /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		4B8AFF8622849D3200D55F7D /* BookContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookContainer.swift; sourceTree = "<group>"; };
@@ -257,6 +260,7 @@
 			children = (
 				4BC6D87C227A120100FF0A03 /* Verse.swift */,
 				4BC6D87F227A12C700FF0A03 /* Book.swift */,
+				4B0871B5228C6F1C00621C5E /* Version.swift */,
 				4B8AFF8922849D8000D55F7D /* Bible.swift */,
 			);
 			path = Models;
@@ -617,6 +621,7 @@
 				4BC6D87D227A120100FF0A03 /* Verse.swift in Sources */,
 				4B8AFF8422849CB100D55F7D /* Container.swift in Sources */,
 				4B8AFF8A22849D8000D55F7D /* Bible.swift in Sources */,
+				4B0871B6228C6F1C00621C5E /* Version.swift in Sources */,
 				4BC6D887227A1A0300FF0A03 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -635,6 +640,7 @@
 				4BC6D87E227A120100FF0A03 /* Verse.swift in Sources */,
 				4B8AFF8522849CB100D55F7D /* Container.swift in Sources */,
 				4B8AFF8B22849D8000D55F7D /* Bible.swift in Sources */,
+				4B0871B7228C6F1C00621C5E /* Version.swift in Sources */,
 				4BC6D888227A1A0300FF0A03 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

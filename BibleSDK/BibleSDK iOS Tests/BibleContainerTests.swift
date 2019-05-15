@@ -10,29 +10,40 @@ import XCTest
 
 class BibleContainerTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testBuildinVersionsCount() {
+        XCTAssertEqual(BibleContainer().availableVersions.count, 2)
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testBooksByName() {
         let container = BibleContainer()
-        XCTAssertEqual(container.bibles.count, 2)
-        let bible = container.bibles.last!
-        let book = bible.books.last!
-        let verses = bible.verses(bookId: book.id)
+        let bible = container.bible(abbr: "kjv")
+        let gen = bible?.book(by: "ge")
+        XCTAssertEqual(gen?.title, "Genesis")
+        XCTAssertEqual(gen?.id, 1)
+
+        let ze = bible?.book(by: "ze")
+        XCTAssertEqual(ze?.title, "Zephaniah")
+    }
+    
+    func testVersesByBookId() {
+        let container = BibleContainer()
+        let bible = container.bible(abbr: "kjv")!
+        XCTAssertEqual(bible.books.last?.chaptersCount, 22)
+        let verses = bible.verses(bookId: 66)
         XCTAssertEqual(verses.count, 404)
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testVersesByBookAndChapter() {
+        let container = BibleContainer()
+        let bible = container.bible(abbr: "kjv")!
+        let verses = bible.verses(bookId: 66, chapters: [1])
+        XCTAssertEqual(verses.count, 20)
+    }
+
+    func testVersesByBookAndChapterAndVerses() {
+        let container = BibleContainer()
+        let bible = container.bible(abbr: "kjv")!
+        let verses = bible.verses(bookId: 66, chapters: [1], verses: [1, 2])
+        XCTAssertEqual(verses.count, 2)
     }
 }

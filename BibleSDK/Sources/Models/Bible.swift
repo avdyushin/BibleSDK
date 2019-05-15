@@ -5,19 +5,69 @@
 //  Created by Grigory Avdyushin on 09/05/2019.
 //
 
-class Bible {
+public protocol BibleProtocol {
+    var version: Version { get }
+    var books: [Book] { get }
+    func book(by name: String) -> Book?
+    func verses(bookId: Book.BookId, chapters: IndexSet, verses: IndexSet) -> [Verse]
+}
 
-    let version: String
+extension BibleProtocol {
+    func verses(bookId: Book.BookId, chapters: IndexSet = [], verses: IndexSet = []) -> [Verse] {
+        return self.verses(bookId: bookId, chapters: chapters, verses: verses)
+    }
+}
+
+class Bible: BibleProtocol {
+
+    let version: Version
     let storage: Storage
     lazy var books = try! fetchAllBooks()
 
-    init(version: String) throws {
-        let path = Bundle(for: type(of: self)).path(forResource: version, ofType: nil)!
-        self.version = ((version as NSString).lastPathComponent as NSString).deletingPathExtension
+    init(name: String) throws {
+        self.version = Version(name: name)
+        let path = Bundle(for: type(of: self)).path(forResource: name, ofType: nil)!
         self.storage = try BaseSqliteStorage(filename: path)
     }
 
+    func book(by name: String) -> Book? {
+        return books.first {
+            $0.title.lowercased().hasPrefix(name.lowercased()) ||
+            $0.alt.lowercased().hasPrefix(name.lowercased()) ||
+            $0.abbr.lowercased().hasPrefix(name.lowercased())
+        }
+    }
+
     func verses(bookId: Book.BookId, chapters: IndexSet = [], verses: IndexSet = []) -> [Verse] {
+        guard !chapters.isEmpty || !verses.isEmpty else {
+            return self.verses(bookId: bookId)
+        }
+
+        guard !verses.isEmpty else {
+            return self.verses(bookId: bookId, chapters: chapters)
+        }
+
+        guard chapters.count == 1, let chapter = chapters.first else {
+            assertionFailure("Can't mix chapter set with verses set")
+            return []
+        }
+
+        let verseSet = verses.map(String.init).joined(separator: ",")
+        return fetchVerses(where: "book_id = \(bookId) AND chapter = \(chapter) AND verse IN (\(verseSet))")
+    }
+
+    fileprivate func verses(bookId: Book.BookId, chapters: IndexSet) -> [Verse] {
+        precondition(!chapters.isEmpty)
+
+        let chapterSet = chapters.map(String.init).joined(separator: ",")
+        return fetchVerses(where: "book_id = \(bookId) AND chapter IN (\(chapterSet))")
+    }
+
+    fileprivate func verses(bookId: Book.BookId) -> [Verse] {
+        return fetchVerses(where: "book_id = \(bookId)")
+    }
+
+    fileprivate func fetchVerses(where condition: String) -> [Verse] {
         let query =
         """
         SELECT
@@ -25,10 +75,10 @@ class Bible {
         FROM
             \(version)_bible
         WHERE
-            book_id = \(bookId);
+            \(condition);
         """
-
         do {
+            debugPrint(query)
             return try storage.fetch(query).map(Verse.init)
         } catch {
             debugPrint(error)
