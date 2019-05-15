@@ -20,6 +20,21 @@ extension BibleProtocol {
 
 class Bible: BibleProtocol {
 
+    struct Reference: Hashable {
+        static func == (lhs: Bible.Reference, rhs: Bible.Reference) -> Bool {
+            return lhs.bible.version == rhs.bible.version &&
+                   lhs.verseReference == rhs.verseReference
+        }
+
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(bible.version)
+            hasher.combine(verseReference)
+        }
+
+        let bible: BibleProtocol
+        let verseReference: Verse.Reference
+    }
+
     let version: Version
     let storage: Storage
     lazy var books = try! fetchAllBooks()
@@ -78,7 +93,7 @@ class Bible: BibleProtocol {
             \(condition);
         """
         do {
-            debugPrint(query)
+            //debugPrint(query)
             return try storage.fetch(query).map(Verse.init)
         } catch {
             debugPrint(error)

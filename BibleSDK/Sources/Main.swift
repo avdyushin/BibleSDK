@@ -10,6 +10,28 @@ public class BibleSDK {
     var bookProvider: BookProvider?
     let abbreviation = try! BibleAbbreviation()
 
+    let bibleContainer = BibleContainer()
+    let dailyContainer: DailyContainer
+
+    init() {
+        let path = Bundle(for: type(of: self)).path(forResource: "kjv_daily", ofType: "db")!
+        let storage = try! SqliteStorage(filename: path)
+        self.dailyContainer = DailyContainer(storage: storage, abbreviation: abbreviation)
+    }
+
+    func dailyReading(_ date: Date = Date()) -> [Bible.Reference: [Verse]] {
+        let references = dailyContainer
+            .dailyReferences(date)
+            .compactMap { bibleContainer.references(raw: $0) }
+
+        guard !references.isEmpty else {
+            return [:]
+        }
+
+        let verses = references.map { bibleContainer.verses(reference: $0) }
+        return Dictionary(uniqueKeysWithValues: zip(references, verses))
+    }
+
     // show list of installed versions
     // load version
 

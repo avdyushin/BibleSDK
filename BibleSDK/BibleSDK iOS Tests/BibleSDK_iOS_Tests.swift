@@ -10,11 +10,22 @@ import XCTest
 
 class BibleSDK_iOS_Tests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testDaily() {
+        let b = BibleSDK()
+        let refs = b.dailyContainer.dailyReferences(Date(timeIntervalSince1970: 123123123))
+        XCTAssertEqual(refs.count, 14)
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testConversion() {
+        let b = BibleSDK()
+        let refs = b.dailyContainer.dailyReferences(Date(timeIntervalSince1970: 123123123))
+        let conv = refs.compactMap { b.bibleContainer.references(raw: $0) }
+        XCTAssertEqual(refs.count, conv.count)
+    }
+
+    func testDailyReading() {
+        let b = BibleSDK()
+        let reading = b.dailyReading(Date(timeIntervalSince1970: 123123123))
+        debugPrint(reading)
     }
 }
