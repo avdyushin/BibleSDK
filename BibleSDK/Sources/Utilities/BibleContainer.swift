@@ -62,21 +62,23 @@ public class BibleContainer {
         return bible.verses(bookId: bookId, chapters: chapters, verses: verses)
     }
 
-    func verses(reference: Bible.Reference) -> [Verse] {
-        assert(!reference.verseReference.locations.isEmpty)
+    func verses(reference: Verse.Reference, version: Version) -> [Verse] {
+        guard !reference.locations.isEmpty, let bible = bible(version: version) else {
+            return []
+        }
 
-        let bible = reference.bible
-        let book = reference.verseReference.book
-
-        return reference.verseReference.locations.flatMap {
-            bible.verses(bookId: book.id, chapters: $0.chapters, verses: $0.verses)
+        return reference.locations.flatMap {
+            bible.verses(bookId: reference.book.id, chapters: $0.chapters, verses: $0.verses)
         }
     }
 
-    func references(raw: Verse.RawReference) -> Bible.Reference? {
+    func references(raw: Verse.RawReference) -> BibleReference? {
         return bibles.values.compactMap {
             if let book = $0.book(by: raw.bookName) {
-                return Bible.Reference(bible: $0, verseReference: Verse.Reference(book: book, locations: raw.locations))
+                return BibleReference(
+                    version: $0.version,
+                    reference: Verse.Reference(book: book, locations: raw.locations)
+                )
             }
             return nil
         }.first

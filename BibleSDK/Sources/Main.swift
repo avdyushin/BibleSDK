@@ -13,13 +13,13 @@ public class BibleSDK {
     let bibleContainer = BibleContainer()
     let dailyContainer: DailyContainer
 
-    init() {
+    public init() {
         let path = Bundle(for: type(of: self)).path(forResource: "kjv_daily", ofType: "db")!
         let storage = try! SqliteStorage(filename: path)
         self.dailyContainer = DailyContainer(storage: storage, abbreviation: abbreviation)
     }
 
-    func dailyReading(_ date: Date = Date()) -> [Bible.Reference: [Verse]] {
+    public func dailyReading(_ date: Date = Date(), version: Version) -> [BibleReference: [Verse]] {
         let references = dailyContainer
             .dailyReferences(date)
             .compactMap { bibleContainer.references(raw: $0) }
@@ -28,37 +28,24 @@ public class BibleSDK {
             return [:]
         }
 
-        let verses = references.map { bibleContainer.verses(reference: $0) }
+        let verses = references.map {
+            bibleContainer.verses(reference: $0.reference, version: version)
+        }
         return Dictionary(uniqueKeysWithValues: zip(references, verses))
     }
 
-    // show list of installed versions
-    // load version
+    public func findByReference(_ string: String) -> [BibleReference: [Verse]] {
+        let references = abbreviation
+            .matches(string)
+            .compactMap { bibleContainer.references(raw: $0) }
 
-    // get books list (for version)
-    // get texts by string ref (interate all versions?)
-    // get texts by ref (for version)
-
-    public func load(path: String) throws {
-        guard FileManager.default.fileExists(atPath: path) else {
-            throw SqliteStorage.StorageError.failedOpenConnection(path)
-        }
-        
-        let storage = try SqliteStorage(filename: path)
-        bookProvider = BookProvider(storage: storage)
-    }
-
-    public func findByReference(_ string: String) -> [Verse] {
-        precondition(!string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-
-        guard let provider = bookProvider else {
-            return []
+        guard !references.isEmpty else {
+            return [:]
         }
 
-        return abbreviation
-            .matches(string) // String -> RawReference
-            //.reduce([], { $0.contains($1) ? $0 : $0 + [$1] }) // Ignore duplicates
-            .compactMap { provider.findBookReference(by: $0) } // -> Reference
-            .flatMap { provider.findVerses(by: $0) } // -> Verses
+        let verses = references.map {
+            bibleContainer.verses(reference: $0.reference, version: $0.version)
+        }
+        return Dictionary(uniqueKeysWithValues: zip(references, verses))
     }
 }

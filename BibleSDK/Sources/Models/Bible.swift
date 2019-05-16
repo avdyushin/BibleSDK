@@ -12,6 +12,11 @@ public protocol BibleProtocol {
     func verses(bookId: Book.BookId, chapters: IndexSet, verses: IndexSet) -> [Verse]
 }
 
+public struct BibleReference: Hashable {
+    let version: Version
+    let reference: Verse.Reference
+}
+
 extension BibleProtocol {
     func verses(bookId: Book.BookId, chapters: IndexSet = [], verses: IndexSet = []) -> [Verse] {
         return self.verses(bookId: bookId, chapters: chapters, verses: verses)
@@ -19,21 +24,6 @@ extension BibleProtocol {
 }
 
 class Bible: BibleProtocol {
-
-    struct Reference: Hashable {
-        static func == (lhs: Bible.Reference, rhs: Bible.Reference) -> Bool {
-            return lhs.bible.version == rhs.bible.version &&
-                   lhs.verseReference == rhs.verseReference
-        }
-
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(bible.version)
-            hasher.combine(verseReference)
-        }
-
-        let bible: BibleProtocol
-        let verseReference: Verse.Reference
-    }
 
     let version: Version
     let storage: Storage
