@@ -10,6 +10,8 @@ public protocol BibleProtocol {
     var books: [Book] { get }
     func book(by name: String) -> Book?
     func verses(bookId: Book.BookId, chapters: IndexSet, verses: IndexSet) -> [Verse]
+    func searchCount(_ string: String) -> Int
+    func search(_ string: String, offset: Int, count: Int) -> [Verse]
 }
 
 public struct BibleReference: Hashable {
@@ -59,6 +61,51 @@ class Bible: BibleProtocol {
 
         let verseSet = verses.map(String.init).joined(separator: ",")
         return fetchVerses(where: "book_id = \(bookId) AND chapter = \(chapter) AND verse IN (\(verseSet))")
+    }
+
+    func searchCount(_ string: String) -> Int {
+        let string = string.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        let query =
+        """
+        SELECT
+            COUNT(*)
+        FROM
+            \(version)_bible
+        WHERE
+            UTF8_UPPER(text)
+        LIKE
+            '%\(string)%';
+        """
+        do {
+            guard let row = try storage.fetch(query).first else {
+                return 0
+            }
+            return row["COUNT(*)"] ?? 0
+        } catch {
+            return 0
+        }
+    }
+
+    func search(_ string: String, offset: Int, count: Int) -> [Verse] {
+        let string = string.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        let query =
+        """
+        SELECT
+            book_id, verse, chapter, text
+        FROM
+            \(version)_bible
+        WHERE
+            UTF8_UPPER(text)
+        LIKE
+            '%\(string)%'
+        LIMIT
+            \(offset), \(count);
+        """
+        do {
+            return try storage.fetch(query).map(Verse.init)
+        } catch {
+            return []
+        }
     }
 
     fileprivate func verses(bookId: Book.BookId, chapters: IndexSet) -> [Verse] {

@@ -140,4 +140,17 @@ class BibleSDK_iOS_Tests: XCTestCase {
         4 And God saw the light, that it was good: and God divided the light from the darkness.
         """)
     }
+
+    func testSearchCount() {
+        let b = BibleSDK()
+        let c = time { b.bibleContainer.searchCount("For god") }
+        debugPrint(c)
+    }
+
+    func testSearchIteratorChunks() {
+        let b = BibleSDK()
+        let i = b.bibleContainer.searchIterator("For god", version: Version(name: "kjv"), chunks: 8)
+        let counts = time { Set(i.map { $0.count }) }
+        XCTAssertEqual(counts, [8, 6])
+    }
 }
