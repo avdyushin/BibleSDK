@@ -7,9 +7,9 @@
 
 public class BibleSDK {
 
-    var bookProvider: BookProvider?
-    let abbreviation = try! BibleAbbreviation()
+    public typealias VerseByReference = [BibleReference: [Verse]]
 
+    let abbreviation = try! BibleAbbreviation()
     let bibleContainer = BibleContainer()
     let dailyContainer: DailyContainer
 
@@ -19,7 +19,7 @@ public class BibleSDK {
         self.dailyContainer = DailyContainer(storage: storage, abbreviation: abbreviation)
     }
 
-    public func dailyReading(_ date: Date = Date(), version: Version) -> [BibleReference: [Verse]] {
+    public func dailyReading(_ date: Date = Date(), version: Version) -> VerseByReference  {
         let references = dailyContainer
             .dailyReferences(date)
             .compactMap { bibleContainer.references(raw: $0) }
@@ -34,7 +34,7 @@ public class BibleSDK {
         return Dictionary(uniqueKeysWithValues: zip(references, verses))
     }
 
-    public func findByReference(_ string: String) -> [BibleReference: [Verse]] {
+    public func findByReference(_ string: String) -> VerseByReference {
         let references = abbreviation
             .matches(string)
             .compactMap { bibleContainer.references(raw: $0) }

@@ -29,9 +29,9 @@ class Bible: BibleProtocol {
     let storage: Storage
     lazy var books = try! fetchAllBooks()
 
-    init(name: String) throws {
-        self.version = Version(name: name)
-        let path = Bundle(for: type(of: self)).path(forResource: name, ofType: nil)!
+    init(version: Version, path: String) throws {
+        self.version = version
+//        let path = Bundle(for: type(of: self)).path(forResource: name, ofType: nil)!
         self.storage = try BaseSqliteStorage(filename: path)
     }
 

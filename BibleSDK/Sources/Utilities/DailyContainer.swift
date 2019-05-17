@@ -32,8 +32,11 @@ class DailyContainer: Container<BaseSqliteStorage> {
     }
 
     func dailyReferences(_ date: Date = Date()) -> [Verse.RawReference] {
-
         let daily = Daily(date)
+        return dailyReferences(day: daily.day, month: daily.month)
+    }
+
+    func dailyReferences(day: Int, month: Int) -> [Verse.RawReference] {
         let query =
         """
         SELECT
@@ -41,7 +44,7 @@ class DailyContainer: Container<BaseSqliteStorage> {
         FROM
             kjv_bible_daily
         WHERE
-            month = \(daily.month) AND day = \(daily.day);
+            month = \(month) AND day = \(day);
         """
 
         do {

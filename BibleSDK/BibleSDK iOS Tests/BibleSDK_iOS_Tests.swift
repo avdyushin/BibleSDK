@@ -8,6 +8,15 @@
 import XCTest
 @testable import BibleSDK
 
+@discardableResult func time<Result>(name: StaticString = #function, line: Int = #line, _ f: () -> Result) -> Result {
+    let startTime = DispatchTime.now()
+    let result = f()
+    let endTime = DispatchTime.now()
+    let diff = Double(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds) / 1_000_000_000 as Double
+    debugPrint("\(name) (line \(line)): \(diff) sec")
+    return result
+}
+
 class BibleSDK_iOS_Tests: XCTestCase {
 
     func testDaily() {
@@ -19,14 +28,31 @@ class BibleSDK_iOS_Tests: XCTestCase {
     func testConversion() {
         let b = BibleSDK()
         let refs = b.dailyContainer.dailyReferences(Date(timeIntervalSince1970: 123123123))
-        let conv = refs.compactMap { b.bibleContainer.references(raw: $0) }
+        let conv = refs.map { b.bibleContainer.references(raw: $0) }
         XCTAssertEqual(refs.count, conv.count)
+    }
+
+    func testAllDailies() {
+        let b = BibleSDK()
+        let v = b.bibleContainer.availableVersions.first { $0.identifier == "kjv" }!
+//        measure {
+            for month in 1...12 {
+                for day in 1...31 {
+                    let refs = b.dailyContainer.dailyReferences(day: day, month: month)
+                    let conv = refs.map { b.bibleContainer.references(raw: $0)! }
+                    _ = conv.map { b.bibleContainer.verses(reference: $0.reference, version: v)}
+                    XCTAssertEqual(refs.count, conv.count)
+                }
+            }
+//        }
     }
 
     func testKJVDailyReading() {
         let b = BibleSDK()
         let v = b.bibleContainer.availableVersions.first { $0.identifier == "kjv" }!
-        let reading = b.dailyReading(Date(timeIntervalSince1970: 123123123), version: v)
+        let reading = time {
+            b.dailyReading(Date(timeIntervalSince1970: 123123123), version: v)
+        }
         XCTAssertEqual(reading.keys.count, 14)
         dump(reading.keys)
         for (key, value) in reading {
@@ -44,13 +70,59 @@ class BibleSDK_iOS_Tests: XCTestCase {
 
     func testRSTDailyReading() {
         let b = BibleSDK()
+        let path = Bundle(for: type(of: self)).path(forResource: "rst", ofType: "db")!
+        let loaded = b.bibleContainer.load(version: Version(name: "rst"), path: path)
+        XCTAssertTrue(loaded)
         let v = b.bibleContainer.availableVersions.first { $0.identifier == "rst" }!
         let reading = b.dailyReading(Date(timeIntervalSince1970: 123123123), version: v)
         XCTAssertEqual(reading.keys.count, 14)
     }
 
+    func testAllDailiesInRST() {
+        let b = BibleSDK()
+        let path = Bundle(for: type(of: self)).path(forResource: "rst", ofType: "db")!
+        _ = b.bibleContainer.load(version: Version(name: "rst"), path: path)
+        let v = b.bibleContainer.availableVersions.first { $0.identifier == "rst" }!
+        time {
+            var total = 0
+            for month in 1...12 {
+                for day in 1...31 {
+                    let refs = b.dailyContainer.dailyReferences(day: day, month: month)
+                    let conv = refs.map { b.bibleContainer.references(raw: $0)! }
+                    let verses = conv.map { b.bibleContainer.verses(reference: $0.reference, version: v)}
+                    total += verses.count
+                    XCTAssertEqual(refs.count, conv.count)
+                }
+            }
+            XCTAssertEqual(total, 5089)
+        }
+    }
+    
+    func testAllDailiesInRSTV2() {
+        let b = BibleSDK()
+        let path = Bundle(for: type(of: self)).path(forResource: "rst", ofType: "db")!
+        _ = b.bibleContainer.load(version: Version(name: "rst"), path: path)
+        let v = b.bibleContainer.availableVersions.first { $0.identifier == "rst" }!
+        time {
+            var total = 0
+            DispatchQueue.concurrentPerform(iterations: 12) { month in
+                DispatchQueue.concurrentPerform(iterations: 31) { day in
+                    let refs = b.dailyContainer.dailyReferences(day: day + 1, month: month + 1)
+                    let conv = refs.map { b.bibleContainer.references(raw: $0)! }
+                    let verses = conv.map { b.bibleContainer.verses(reference: $0.reference, version: v)}
+                    total += verses.count
+                    XCTAssertEqual(refs.count, conv.count)
+                }
+            }
+            XCTAssertEqual(total, 5089)
+        }
+    }
+
     func testFetchByRefs() {
         let b = BibleSDK()
+        let path = Bundle(for: type(of: self)).path(forResource: "rst", ofType: "db")!
+        let loaded = b.bibleContainer.load(version: Version(name: "rst"), path: path)
+        XCTAssertTrue(loaded)
         let verses = b.findByReference("Gen 1:1 Быт 1:1")
         XCTAssertEqual(verses.keys.count, 2)
         dump(verses)

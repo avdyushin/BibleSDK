@@ -39,7 +39,6 @@ class BaseSqliteStorage: Storage {
 
     init(filename: String) throws {
         precondition(!filename.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-
         guard let pointer = open(filename) else {
             throw StorageError.failedOpenConnection(filename)
         }
@@ -51,7 +50,7 @@ class BaseSqliteStorage: Storage {
         precondition(!filename.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 
         var db: OpaquePointer? = .none
-        guard sqlite3_open_v2(filename, &db, SQLITE_OPEN_READONLY, nil) == SQLITE_OK else {
+        guard sqlite3_open_v2(filename, &db, SQLITE_OPEN_READONLY | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else {
             return nil
         }
         return db
@@ -72,7 +71,7 @@ class BaseSqliteStorage: Storage {
 
     func prepare(_ statement: String) throws -> OpaquePointer {
         var query: OpaquePointer?
-        guard sqlite3_prepare(db, statement, -1, &query, nil) == SQLITE_OK else {
+        guard sqlite3_prepare_v2(db, statement, -1, &query, nil) == SQLITE_OK else {
             let message = String(cString: sqlite3_errmsg(db))
             throw StorageError.failedPrepare(statement, message: message)
         }
@@ -104,14 +103,12 @@ class BaseSqliteStorage: Storage {
         precondition(db != nil)
         precondition(!statement.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 
-        sqlite3_interrupt(db)
-
         let query = try prepare(statement)
 
         defer {
+            // Called after return
             sqlite3_finalize(query)
         }
-
         return fetchRows(query: query)
     }
 }

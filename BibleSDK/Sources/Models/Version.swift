@@ -12,10 +12,8 @@ public struct Version: Hashable {
     let identifier: String
     let abbr: String
 
-    // Pass "kjv.db"
     init(name: String) {
-        precondition(!name.isEmpty)
-        self.identifier = ((name as NSString).lastPathComponent as NSString).deletingPathExtension
+        self.identifier = name
         self.abbr = self.identifier.uppercased()
     }
 }

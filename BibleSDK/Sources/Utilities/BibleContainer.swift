@@ -7,20 +7,35 @@
 
 public class BibleContainer {
 
-    private let bibles: [Version: BibleProtocol]
+    private var bibles: [Version: BibleProtocol]
 
     public var availableVersions: [Version] {
         return bibles.keys.map { $0 }
     }
 
     public init() {
-        let list = FileManager
-            .default
-            .enumerator(atPath: Bundle(for: type(of: self)).bundlePath)!
-            .map { $0 as! String }
-            .filter { $0.hasSuffix(".db") == true && $0 != "kjv_daily.db" }
-            .map { try? Bible(name: $0) }
-        self.bibles = Dictionary(uniqueKeysWithValues: list.map { ($0!.version, $0!) })
+//        let list = FileManager
+//            .default
+//            .enumerator(atPath: Bundle(for: type(of: self)).bundlePath)!
+//            .map { $0 as! String }
+//            .filter { $0.hasSuffix(".db") == true && $0 != "kjv_daily.db" }
+//            .map { try? Bible(name: $0) }
+//Dictionary(uniqueKeysWithValues: list.map { ($0!.version, $0!) })
+
+        let path = Bundle(for: type(of: self)).path(forResource: "kjv", ofType: "db")!
+        let kjv = try! Bible(version: Version(name: "kjv"), path: path)
+        self.bibles = [kjv.version: kjv]
+    }
+
+    public func load(version: Version, path: String) -> Bool {
+        guard !bibles.keys.contains(version) else {
+            return false
+        }
+        guard let bible = try? Bible(version: version, path: path) else {
+            return false
+        }
+        bibles[version] = bible
+        return true
     }
 
     public func bible(abbr: String) -> BibleProtocol? {

@@ -11,7 +11,7 @@ import XCTest
 class BibleContainerTests: XCTestCase {
 
     func testBuildinVersionsCount() {
-        XCTAssertEqual(BibleContainer().availableVersions.count, 2)
+        XCTAssertEqual(BibleContainer().availableVersions.count, 1)
     }
 
     func testBooksByName() {
