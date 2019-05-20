@@ -19,15 +19,11 @@ public class BibleContainer {
         self.bibles = [kjv.version: kjv]
     }
 
-    public func load(version: Version, path: String) -> Bool {
+    public func load(version: Version, path: String) throws {
         guard !bibles.keys.contains(version) else {
-            return false
+            return
         }
-        guard let bible = try? Bible(version: version, path: path) else {
-            return false
-        }
-        bibles[version] = bible
-        return true
+        bibles[version] = try Bible(version: version, path: path)
     }
 
     public func bible(abbr: String) -> BibleProtocol? {

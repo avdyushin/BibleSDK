@@ -5,9 +5,9 @@
 //  Created by Grigory Avdyushin on 30/04/2019.
 //
 
-public class BibleSDK {
+public typealias VerseByReference = [BibleReference: [Verse]]
 
-    public typealias VerseByReference = [BibleReference: [Verse]]
+public class BibleSDK {
 
     let abbreviation = try! BibleAbbreviation()
     let bibleContainer = BibleContainer()
@@ -17,6 +17,10 @@ public class BibleSDK {
         let path = Bundle(for: type(of: self)).path(forResource: "kjv_daily", ofType: "db")!
         let storage = try! BaseSqliteStorage(filename: path)
         self.dailyContainer = DailyContainer(storage: storage, abbreviation: abbreviation)
+    }
+
+    public func load(version: Version, filename: String) throws {
+        try bibleContainer.load(version: version, path: filename)
     }
 
     public func dailyReading(_ date: Date = Date(), version: Version) -> VerseByReference  {

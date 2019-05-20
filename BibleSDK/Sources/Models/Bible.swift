@@ -14,9 +14,14 @@ public protocol BibleProtocol {
     func search(_ string: String, offset: Int, count: Int) -> [Verse]
 }
 
-public struct BibleReference: Hashable {
+public struct BibleReference: Hashable, Comparable {
     let version: Version
     let reference: Verse.Reference
+
+    public static func < (lhs: BibleReference, rhs: BibleReference) -> Bool {
+        return lhs.version.abbr.compare(rhs.version.abbr) == .orderedAscending &&
+            lhs.reference.book.id < rhs.reference.book.id
+    }
 }
 
 extension BibleProtocol {
