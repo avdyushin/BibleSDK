@@ -17,13 +17,6 @@ public struct Verse: Hashable, Equatable {
     public let chapter: ChapterIndex
     public let number: VerseIndex
     public let text: String
-
-    init(book: Book.BookId, chapter: ChapterIndex, number: VerseIndex, text: String) {
-        self.book = book
-        self.chapter = chapter
-        self.number = number
-        self.text = text
-    }
 }
 
 extension Verse {

@@ -35,7 +35,7 @@ class BaseSqliteStorage: Storage {
         case failedPrepare(String, message: String)
     }
 
-    private var db: OpaquePointer? = .none
+    private var db: OpaquePointer!
 
     init(filename: String) throws {
         precondition(!filename.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -57,8 +57,6 @@ class BaseSqliteStorage: Storage {
     }
 
     fileprivate func injectCustomFunctions() {
-        precondition(db != nil)
-
         sqlite3_create_function(db, "utf8_upper".cString(using: .utf8), 1, SQLITE_UTF8, nil, { context, argc, arguments in
             let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
             let argv = Array(UnsafeBufferPointer(start: arguments, count: Int(argc)))
@@ -70,7 +68,7 @@ class BaseSqliteStorage: Storage {
     }
 
     func prepare(_ statement: String) throws -> OpaquePointer {
-        var query: OpaquePointer?
+        var query: OpaquePointer? = .none
         guard sqlite3_prepare_v2(db, statement, -1, &query, nil) == SQLITE_OK else {
             let message = String(cString: sqlite3_errmsg(db))
             throw StorageError.failedPrepare(statement, message: message)
@@ -127,7 +125,7 @@ class SqliteStorage: BaseSqliteStorage, AsyncStorage {
         return queue
     }()
 
-    override func fetch(_ statement: String) throws -> [Row]{
+    override func fetch(_ statement: String) throws -> [Row] {
         var results: [Row] = []
         try syncQueue.sync {
             results = try super.fetch(statement)

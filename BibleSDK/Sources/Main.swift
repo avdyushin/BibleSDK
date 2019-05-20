@@ -15,7 +15,7 @@ public class BibleSDK {
 
     public init() {
         let path = Bundle(for: type(of: self)).path(forResource: "kjv_daily", ofType: "db")!
-        let storage = try! SqliteStorage(filename: path)
+        let storage = try! BaseSqliteStorage(filename: path)
         self.dailyContainer = DailyContainer(storage: storage, abbreviation: abbreviation)
     }
 
@@ -25,6 +25,7 @@ public class BibleSDK {
             .compactMap { bibleContainer.references(raw: $0) }
 
         guard !references.isEmpty else {
+            assertionFailure()
             return [:]
         }
 
