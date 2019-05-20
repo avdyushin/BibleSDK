@@ -15,7 +15,7 @@ public class BibleContainer {
 
     public init() {
         let path = Bundle(for: type(of: self)).path(forResource: "kjv", ofType: "db")!
-        let kjv = try! Bible(version: Version(name: "kjv"), path: path)
+        let kjv = try! Bible(version: Version("kjv"), path: path)
         self.bibles = [kjv.version: kjv]
     }
 

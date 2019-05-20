@@ -71,7 +71,7 @@ class BibleSDK_iOS_Tests: XCTestCase {
     func testRSTDailyReading() {
         let b = BibleSDK()
         let path = Bundle(for: type(of: self)).path(forResource: "rst", ofType: "db")!
-        let loaded = b.bibleContainer.load(version: Version(name: "rst"), path: path)
+        let loaded = b.bibleContainer.load(version: Version("rst"), path: path)
         XCTAssertTrue(loaded)
         let v = b.bibleContainer.availableVersions.first { $0.identifier == "rst" }!
         let reading = b.dailyReading(Date(timeIntervalSince1970: 123123123), version: v)
@@ -81,7 +81,7 @@ class BibleSDK_iOS_Tests: XCTestCase {
     func testAllDailiesInRST() {
         let b = BibleSDK()
         let path = Bundle(for: type(of: self)).path(forResource: "rst", ofType: "db")!
-        _ = b.bibleContainer.load(version: Version(name: "rst"), path: path)
+        _ = b.bibleContainer.load(version: Version("rst"), path: path)
         let v = b.bibleContainer.availableVersions.first { $0.identifier == "rst" }!
         time {
             var total = 0
@@ -101,7 +101,7 @@ class BibleSDK_iOS_Tests: XCTestCase {
     func testAllDailiesInRSTV2() {
         let b = BibleSDK()
         let path = Bundle(for: type(of: self)).path(forResource: "rst", ofType: "db")!
-        _ = b.bibleContainer.load(version: Version(name: "rst"), path: path)
+        _ = b.bibleContainer.load(version: Version("rst"), path: path)
         let v = b.bibleContainer.availableVersions.first { $0.identifier == "rst" }!
         time {
             var total = 0
@@ -121,7 +121,7 @@ class BibleSDK_iOS_Tests: XCTestCase {
     func testFetchByRefs() {
         let b = BibleSDK()
         let path = Bundle(for: type(of: self)).path(forResource: "rst", ofType: "db")!
-        let loaded = b.bibleContainer.load(version: Version(name: "rst"), path: path)
+        let loaded = b.bibleContainer.load(version: Version("rst"), path: path)
         XCTAssertTrue(loaded)
         let verses = b.findByReference("Gen 1:1 Быт 1:1")
         XCTAssertEqual(verses.keys.count, 2)
@@ -149,7 +149,7 @@ class BibleSDK_iOS_Tests: XCTestCase {
 
     func testSearchIteratorChunks() {
         let b = BibleSDK()
-        let i = b.bibleContainer.searchIterator("For god", version: Version(name: "kjv"), chunks: 8)
+        let i = b.bibleContainer.searchIterator("For god", version: Version("kjv"), chunks: 8)
         let counts = time { Set(i.map { $0.count }) }
         XCTAssertEqual(counts, [8, 6])
     }

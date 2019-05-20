@@ -12,7 +12,7 @@ public struct Version: Hashable {
     let identifier: String
     let abbr: String
 
-    init(name: String) {
+    public init(_ name: String) {
         self.identifier = name
         self.abbr = self.identifier.uppercased()
     }
