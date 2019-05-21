@@ -8,34 +8,34 @@
 
 import Foundation
 
-struct Regex {
+public struct Regex {
 
     private let expression: NSRegularExpression
 
-    init(pattern: String, options: NSRegularExpression.Options = []) throws {
+    public init(pattern: String, options: NSRegularExpression.Options = []) throws {
         expression = try NSRegularExpression(pattern: pattern, options: options)
     }
 
-    func matches(_ string: String,
-                 options: NSRegularExpression.MatchingOptions = [],
-                 range: NSRange? = nil) -> [NSTextCheckingResult] {
+    public func matches(_ string: String,
+                        options: NSRegularExpression.MatchingOptions = [],
+                        range: NSRange? = nil) -> [NSTextCheckingResult] {
 
         let range = range ?? NSRange(string.startIndex..., in: string)
         return expression.matches(in: string, options: options, range: range)
     }
 
-    func enumerate(in string: String,
-                   options: NSRegularExpression.MatchingOptions = [],
-                   range: NSRange? = nil,
-                   using block: (NSTextCheckingResult?, NSRegularExpression.MatchingFlags, UnsafeMutablePointer<ObjCBool>) -> Void) {
+    public func enumerate(in string: String,
+                          options: NSRegularExpression.MatchingOptions = [],
+                          range: NSRange? = nil,
+                          using block: (NSTextCheckingResult?, NSRegularExpression.MatchingFlags, UnsafeMutablePointer<ObjCBool>) -> Void) {
         let range = range ?? NSRange(string.startIndex..., in: string)
         expression.enumerateMatches(in: string, options: options, range: range, using: block)
     }
 
-    func replace(_ string: String,
-                 withTemplate template: String,
-                 options: NSRegularExpression.MatchingOptions = [],
-                 range: NSRange? = nil) -> String {
+    public func replace(_ string: String,
+                        withTemplate template: String,
+                        options: NSRegularExpression.MatchingOptions = [],
+                        range: NSRange? = nil) -> String {
 
         let range = range ?? NSRange(string.startIndex..., in: string)
         return expression.stringByReplacingMatches(in: string,
@@ -45,7 +45,7 @@ struct Regex {
     }
 }
 
-extension NSTextCheckingResult {
+public extension NSTextCheckingResult {
 
     func resultValue<T>(_ string: String, withName name: String) -> T? {
         if T.self == String.self {

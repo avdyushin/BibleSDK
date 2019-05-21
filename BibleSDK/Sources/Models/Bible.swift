@@ -15,8 +15,8 @@ public protocol BibleProtocol {
 }
 
 public struct BibleReference: Hashable, Comparable {
-    let version: Version
-    let reference: Verse.Reference
+    public let version: Version
+    public let reference: Verse.Reference
 
     public static func < (lhs: BibleReference, rhs: BibleReference) -> Bool {
         return lhs.version.abbr.compare(rhs.version.abbr) == .orderedAscending &&

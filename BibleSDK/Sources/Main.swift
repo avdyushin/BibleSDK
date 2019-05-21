@@ -53,4 +53,12 @@ public class BibleSDK {
         }
         return Dictionary(uniqueKeysWithValues: zip(references, verses))
     }
+
+    public func searchCount(_ string: String) -> [Version: Int] {
+        return bibleContainer.searchCount(string)
+    }
+
+    public func searchIterator(_ string: String, version: Version, chunks: Int = 10) -> AnyIterator<[Verse]> {
+        return bibleContainer.searchIterator(string, version: version, chunks: chunks)
+    }
 }

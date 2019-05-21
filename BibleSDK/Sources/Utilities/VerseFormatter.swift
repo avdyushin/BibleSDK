@@ -26,6 +26,7 @@ public protocol VerseConverterDelegate {
 }
 
 public enum HtmlVerseConverter: VerseConverterDelegate {
+
     static let header = """
         <!DOCTYPE html><html><head>
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
@@ -186,6 +187,7 @@ public enum PlainTextVerseConverter: VerseConverterDelegate {
 }
 
 public struct VerseConverter<Converter: VerseConverterDelegate> {
+    public init() { }
     public func convert(verses: [Verse], styles: [VerseFormatStyle]) -> NSAttributedString {
         return Converter.convert(verses: verses, styles: styles)
     }
