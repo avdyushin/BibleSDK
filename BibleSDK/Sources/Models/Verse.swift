@@ -52,8 +52,8 @@ public extension Verse {
 
     struct Reference: Hashable, Equatable, Comparable, CustomStringConvertible {
 
-        let book: Book
-        let locations: Set<Location>
+        public let book: Book
+        public let locations: Set<Location>
 
         static public func <(lhs: Reference, rhs: Reference) -> Bool {
             return lhs.book.id < rhs.book.id
