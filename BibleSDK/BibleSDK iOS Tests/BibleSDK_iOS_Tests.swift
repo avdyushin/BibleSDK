@@ -172,4 +172,11 @@ class BibleSDK_iOS_Tests: XCTestCase {
         let counts = time { Set(i.map { $0.count }) }
         XCTAssertEqual(counts, [8, 6])
     }
+
+    func testBibleSubscript() {
+        let bibles = BibleSDK()
+        let kjvBible = bibles["kjv"]!
+        let genesisBook = kjvBible["gen"]
+        XCTAssertEqual(genesisBook?.title, "Genesis")
+    }
 }

@@ -13,6 +13,14 @@ public class BibleSDK {
     let bibleContainer = BibleContainer()
     let dailyContainer: DailyContainer
 
+    public subscript(version: Version) -> BibleProtocol? {
+        return bibleContainer[version]
+    }
+
+    public subscript(abbr: String) -> BibleProtocol? {
+        return self[Version(abbr)]
+    }
+
     public init() {
         let path = Bundle(for: type(of: self)).path(forResource: "kjv_daily", ofType: "db")!
         let storage = try! BaseSqliteStorage(filename: path)
@@ -56,6 +64,10 @@ public class BibleSDK {
             .filter { !$0.isEmpty }
 
         return Dictionary(uniqueKeysWithValues: zip(references, verses))
+    }
+
+    public func versesByBook(_ book: Book, chapters: IndexSet = [1], verses: IndexSet = [], version: Version) -> [Verse] {
+        return bibleContainer.verses(version: version, bookId: book.id, chapters: chapters, verses: verses)
     }
 
     public func searchCount(_ string: String) -> [Version: Int] {

@@ -13,6 +13,8 @@ public protocol BibleProtocol {
     func verses(bookId: Book.BookId, chapters: IndexSet, verses: IndexSet) -> [Verse]
     func searchCount(_ string: String) -> Int
     func search(_ string: String, offset: Int, count: Int) -> [Verse]
+    subscript(id: Book.BookId) -> Book? { get }
+    subscript(name: String) -> Book? { get }
 }
 
 public struct BibleReference: Hashable, Comparable {
@@ -54,6 +56,14 @@ class Bible: BibleProtocol {
         return books.first {
             $0.id == id
         }
+    }
+
+    subscript(id: Book.BookId) -> Book? {
+        return book(id: id)
+    }
+
+    subscript(name: String) -> Book? {
+        return book(name: name)
     }
 
     func verses(bookId: Book.BookId, chapters: IndexSet = [], verses: IndexSet = []) -> [Verse] {
