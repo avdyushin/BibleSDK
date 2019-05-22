@@ -26,6 +26,7 @@ public class BibleSDK {
     public func dailyReading(_ date: Date = Date(), version: Version) -> VerseByReference  {
         let references = dailyContainer
             .dailyReferences(date)
+            .reduce([], { $0.contains($1) ? $0 : $0 + [$1]} )
             .compactMap { bibleContainer.references(raw: $0) }
 
         guard !references.isEmpty else {
@@ -33,24 +34,27 @@ public class BibleSDK {
             return [:]
         }
 
-        let verses = references.map {
-            bibleContainer.verses(reference: $0.reference, version: version)
-        }
+        let verses = references
+            .map { bibleContainer.verses(reference: $0.reference, version: version) }
+            .filter { !$0.isEmpty }
+
         return Dictionary(uniqueKeysWithValues: zip(references, verses))
     }
 
     public func findByReference(_ string: String) -> VerseByReference {
         let references = abbreviation
             .matches(string)
+            .reduce([], { $0.contains($1) ? $0 : $0 + [$1]} )
             .compactMap { bibleContainer.references(raw: $0) }
 
         guard !references.isEmpty else {
             return [:]
         }
 
-        let verses = references.map {
-            bibleContainer.verses(reference: $0.reference, version: $0.version)
-        }
+        let verses = references
+            .map { bibleContainer.verses(reference: $0.reference, version: $0.version) }
+            .filter { !$0.isEmpty }
+
         return Dictionary(uniqueKeysWithValues: zip(references, verses))
     }
 

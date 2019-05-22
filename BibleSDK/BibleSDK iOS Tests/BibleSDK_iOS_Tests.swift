@@ -47,6 +47,28 @@ class BibleSDK_iOS_Tests: XCTestCase {
 //        }
     }
 
+    func testAllDailiesNonEmpty() {
+        let b = BibleSDK()
+        let v = b.bibleContainer.availableVersions.first { $0.identifier == "kjv" }!
+        for month in 1...12 {
+            for day in 1...31 {
+                let refs = b.dailyContainer.dailyReferences(day: day, month: month)
+                let conv = refs
+                    .reduce([], { $0.contains($1) ? $0 : $0 + [$1]} )
+                    .map { b.bibleContainer.references(raw: $0)! }
+                let verses = conv
+                    .map { b.bibleContainer.verses(reference: $0.reference, version: v) }
+                    .filter { !$0.isEmpty }
+                let dict = Dictionary(uniqueKeysWithValues: zip(conv, verses))
+                if !refs.isEmpty {
+                    for (key, verses) in dict {
+                        XCTAssertFalse(verses.isEmpty, "Can't find \(key)")
+                    }
+                }
+            }
+        }
+    }
+
     func testKJVDailyReading() {
         let b = BibleSDK()
         let v = b.bibleContainer.availableVersions.first { $0.identifier == "kjv" }!
@@ -74,7 +96,7 @@ class BibleSDK_iOS_Tests: XCTestCase {
         XCTAssertNoThrow(try b.bibleContainer.load(version: Version("rst"), path: path))
         let v = b.bibleContainer.availableVersions.first { $0.identifier == "rst" }!
         let reading = b.dailyReading(Date(timeIntervalSince1970: 123123123), version: v)
-        XCTAssertEqual(reading.keys.count, 14)
+        XCTAssertEqual(reading.keys.count, 13)
     }
 
     func testAllDailiesInRST() {
