@@ -30,10 +30,10 @@ public class BibleContainer {
         guard let version = availableVersions.first(where: { $0.identifier.lowercased() == abbr.lowercased() }) else {
             return nil
         }
-        return bible(version: version)
+        return self[version]
     }
 
-    public func bible(version: Version) -> BibleProtocol? {
+    subscript(version: Version) -> BibleProtocol? {
         return bibles[version]
     }
 
@@ -45,29 +45,14 @@ public class BibleContainer {
     }
 
     public func books(version: Version) -> [Book] {
-        guard let bible = bible(version: version) else {
+        guard let bible = self[version] else {
             return []
         }
         return bible.books
     }
 
-    public func convert(reference: BibleReference, to version: Version) -> BibleReference? {
-        guard let bible = bible(version: version) else {
-            return nil
-        }
-        let bookId = reference.reference.book.id
-        guard let book = bible.book(id: bookId) else {
-            return nil
-        }
-
-        return BibleReference(
-            version: version,
-            reference: Verse.Reference(book: book, locations: reference.reference.locations)
-        )
-    }
-
     public func verses(version: Version, bookId: Book.BookId, chapters: IndexSet = [], verses: IndexSet = []) -> [Verse] {
-        guard let bible = bible(version: version) else {
+        guard let bible = self[version] else {
             return []
         }
         return bible.verses(bookId: bookId, chapters: chapters, verses: verses)
@@ -87,7 +72,7 @@ public class BibleContainer {
 
     func searchIterator(_ string: String, version: Version, chunks: Int = 10) -> AnyIterator<[Verse]> {
         guard
-            let bible = bible(version: version),
+            let bible = self[version],
             let total = searchCount(string)[version], total > 0 else {
                 return AnyIterator { nil }
         }
@@ -108,7 +93,7 @@ public class BibleContainer {
     }
     
     func verses(reference: Verse.Reference, version: Version) -> [Verse] {
-        guard !reference.locations.isEmpty, let bible = bible(version: version) else {
+        guard !reference.locations.isEmpty, let bible = self[version] else {
             return []
         }
 
@@ -117,13 +102,20 @@ public class BibleContainer {
         }
     }
 
-    func references(raw: Verse.RawReference) -> BibleReference? {
+    func references(raw: Verse.RawReference, version: Version? = nil) -> BibleReference? {
         return bibles.values.compactMap {
             if let book = $0.book(name: raw.bookName) {
-                return BibleReference(
-                    version: $0.version,
-                    reference: Verse.Reference(book: book, locations: raw.locations)
-                )
+                if let version = version, let bible = self[version], let bookInVersion = bible.book(id: book.id) {
+                    return BibleReference(
+                        version: version,
+                        reference: Verse.Reference(book: bookInVersion, locations: raw.locations)
+                    )
+                } else {
+                    return BibleReference(
+                        version: $0.version,
+                        reference: Verse.Reference(book: book, locations: raw.locations)
+                    )
+                }
             }
             return nil
         }.first

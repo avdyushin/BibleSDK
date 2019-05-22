@@ -27,15 +27,14 @@ public class BibleSDK {
         let references = dailyContainer
             .dailyReferences(date)
             .reduce([], { $0.contains($1) ? $0 : $0 + [$1]} )
-            .compactMap { bibleContainer.references(raw: $0) }
+            .compactMap { bibleContainer.references(raw: $0, version: version) }
 
         guard !references.isEmpty else {
             assertionFailure()
             return [:]
         }
 
-        let refs = references.compactMap { bibleContainer.convert(reference: $0, to: version) }
-        let verses = refs
+        let verses = references
             .map { bibleContainer.verses(reference: $0.reference, version: version) }
             .filter { !$0.isEmpty }
 

@@ -76,7 +76,6 @@ class BibleSDK_iOS_Tests: XCTestCase {
             b.dailyReading(Date(timeIntervalSince1970: 123123123), version: v)
         }
         XCTAssertEqual(reading.keys.count, 14)
-        dump(reading.keys)
         for (key, value) in reading {
             switch key.reference.title {
             case "2 Corinthians": XCTAssertEqual(value.count, 1)
