@@ -17,12 +17,18 @@ class BibleContainerTests: XCTestCase {
     func testBooksByName() {
         let container = BibleContainer()
         let bible = container.bible(abbr: "kjv")
-        let gen = bible?.book(by: "ge")
+        let gen = bible?.book(name: "ge")
         XCTAssertEqual(gen?.title, "Genesis")
         XCTAssertEqual(gen?.id, 1)
 
-        let ze = bible?.book(by: "ze")
+        let ze = bible?.book(name: "ze")
         XCTAssertEqual(ze?.title, "Zephaniah")
+    }
+
+    func testBookById() {
+        let container = BibleContainer()
+        let bible = container.bible(abbr: "kjv")!
+        XCTAssertEqual(bible.book(id: 1)!.title, "Genesis")
     }
     
     func testVersesByBookId() {

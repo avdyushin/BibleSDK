@@ -34,7 +34,8 @@ public class BibleSDK {
             return [:]
         }
 
-        let verses = references
+        let refs = references.compactMap { bibleContainer.convert(reference: $0, to: version) }
+        let verses = refs
             .map { bibleContainer.verses(reference: $0.reference, version: version) }
             .filter { !$0.isEmpty }
 

@@ -51,6 +51,21 @@ public class BibleContainer {
         return bible.books
     }
 
+    public func convert(reference: BibleReference, to version: Version) -> BibleReference? {
+        guard let bible = bible(version: version) else {
+            return nil
+        }
+        let bookId = reference.reference.book.id
+        guard let book = bible.book(id: bookId) else {
+            return nil
+        }
+
+        return BibleReference(
+            version: version,
+            reference: Verse.Reference(book: book, locations: reference.reference.locations)
+        )
+    }
+
     public func verses(version: Version, bookId: Book.BookId, chapters: IndexSet = [], verses: IndexSet = []) -> [Verse] {
         guard let bible = bible(version: version) else {
             return []
@@ -104,7 +119,7 @@ public class BibleContainer {
 
     func references(raw: Verse.RawReference) -> BibleReference? {
         return bibles.values.compactMap {
-            if let book = $0.book(by: raw.bookName) {
+            if let book = $0.book(name: raw.bookName) {
                 return BibleReference(
                     version: $0.version,
                     reference: Verse.Reference(book: book, locations: raw.locations)

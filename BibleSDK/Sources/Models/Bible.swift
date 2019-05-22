@@ -8,7 +8,8 @@
 public protocol BibleProtocol {
     var version: Version { get }
     var books: [Book] { get }
-    func book(by name: String) -> Book?
+    func book(name: String) -> Book?
+    func book(id: Book.BookId) -> Book?
     func verses(bookId: Book.BookId, chapters: IndexSet, verses: IndexSet) -> [Verse]
     func searchCount(_ string: String) -> Int
     func search(_ string: String, offset: Int, count: Int) -> [Verse]
@@ -38,15 +39,20 @@ class Bible: BibleProtocol {
 
     init(version: Version, path: String) throws {
         self.version = version
-//        let path = Bundle(for: type(of: self)).path(forResource: name, ofType: nil)!
         self.storage = try BaseSqliteStorage(filename: path)
     }
 
-    func book(by name: String) -> Book? {
+    func book(name: String) -> Book? {
         return books.first {
             $0.title.lowercased().hasPrefix(name.lowercased()) ||
             $0.alt.lowercased().hasPrefix(name.lowercased()) ||
             $0.abbr.lowercased().hasPrefix(name.lowercased())
+        }
+    }
+
+    func book(id: Book.BookId) -> Book? {
+        return books.first {
+            $0.id == id
         }
     }
 
@@ -135,7 +141,6 @@ class Bible: BibleProtocol {
             \(condition);
         """
         do {
-            //debugPrint(query)
             return try storage.fetch(query).map(Verse.init)
         } catch {
             debugPrint(error)
