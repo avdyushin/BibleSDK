@@ -19,6 +19,11 @@ import XCTest
 
 class BibleSDK_iOS_Tests: XCTestCase {
 
+    func testVersion() {
+        let v: Version = "kjv"
+        XCTAssertEqual(v.abbr, "KJV")
+    }
+
     func testDaily() {
         let b = BibleSDK()
         let refs = b.dailyContainer.dailyReferences(Date(timeIntervalSince1970: 123123123))

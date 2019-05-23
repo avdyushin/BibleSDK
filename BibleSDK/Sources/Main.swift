@@ -66,8 +66,16 @@ public class BibleSDK {
         return Dictionary(uniqueKeysWithValues: zip(references, verses))
     }
 
-    public func versesByBook(_ book: Book, chapters: IndexSet = [1], verses: IndexSet = [], version: Version) -> [Verse] {
-        return bibleContainer.verses(version: version, bookId: book.id, chapters: chapters, verses: verses)
+    public func versesByBook(_ book: Book, chapters: IndexSet = [], verses: IndexSet = [], version: Version) -> VerseByReference {
+        let bookReference = BibleReference(
+            version: version,
+            reference: Verse.Reference(
+                book: book,
+                locations: [Verse.Location(chapters: chapters, verses: verses)]
+            )
+        )
+        let verses = bibleContainer.verses(version: version, bookId: book.id, chapters: chapters, verses: verses)
+        return [bookReference: verses]
     }
 
     public func searchCount(_ string: String) -> [Version: Int] {

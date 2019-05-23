@@ -7,7 +7,7 @@
 
 import UIKit
 
-public struct Version: Hashable {
+public struct Version: Hashable, ExpressibleByStringLiteral {
 
     let identifier: String
     let abbr: String
@@ -15,6 +15,10 @@ public struct Version: Hashable {
     public init(_ name: String) {
         self.identifier = name
         self.abbr = self.identifier.uppercased()
+    }
+
+    public init(stringLiteral value: String) {
+        self.init(value)
     }
 }
 
