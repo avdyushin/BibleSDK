@@ -173,9 +173,10 @@ class BibleSDK_iOS_Tests: XCTestCase {
 
     func testSearchIteratorChunks() {
         let b = BibleSDK()
-        let i = b.bibleContainer.searchIterator("For god", version: Version("kjv"), chunks: 8)
+        let i = b.bibleContainer.searchIterator("For god", version: "kjv", chunks: 8)
+        let c = b.bibleContainer.searchCount("For god")["kjv"] ?? 0
         let counts = time { Set(i.map { $0.count }) }
-        XCTAssertEqual(counts, [8, 6])
+        XCTAssertEqual(counts.sorted(), [c % 8, 8])
     }
 
     func testBibleSubscript() {

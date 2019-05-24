@@ -91,11 +91,11 @@ class Bible: BibleProtocol {
         SELECT
             COUNT(*)
         FROM
-            \(version)_bible
+            \(version)_bible_index
         WHERE
-            UTF8_UPPER(text)
-        LIKE
-            '%\(string)%';
+            text
+        MATCH
+            '\(string)';
         """
         do {
             guard let row = try storage.fetch(query).first else {
@@ -114,11 +114,11 @@ class Bible: BibleProtocol {
         SELECT
             book_id, verse, chapter, text
         FROM
-            \(version)_bible
+            \(version)_bible_index
         WHERE
-            UTF8_UPPER(text)
-        LIKE
-            '%\(string)%'
+            text
+        MATCH
+            '\(string)'
         LIMIT
             \(offset), \(count);
         """
