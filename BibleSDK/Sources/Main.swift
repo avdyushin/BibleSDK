@@ -82,7 +82,7 @@ public class BibleSDK {
         return bibleContainer.searchCount(string)
     }
 
-    public func searchIterator(_ string: String, version: Version, chunks: Int = 10) -> AnyIterator<[Verse]> {
-        return bibleContainer.searchIterator(string, version: version, chunks: chunks)
+    public func searchIterator(_ string: String, version: Version, chunks: Int = 10, surround: (String, String)? = nil) -> AnyIterator<[Verse]> {
+        return bibleContainer.searchIterator(string, version: version, chunks: chunks, surround: surround)
     }
 }

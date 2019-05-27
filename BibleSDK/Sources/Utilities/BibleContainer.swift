@@ -70,7 +70,7 @@ public class BibleContainer {
         return Dictionary(uniqueKeysWithValues: zip(availableVersions, counts))
     }
 
-    func searchIterator(_ string: String, version: Version, chunks: Int = 10) -> AnyIterator<[Verse]> {
+    func searchIterator(_ string: String, version: Version, chunks: Int = 10, surround: (String, String)? = nil) -> AnyIterator<[Verse]> {
         guard
             let bible = self[version],
             let total = searchCount(string)[version], total > 0 else {
@@ -86,7 +86,7 @@ public class BibleContainer {
                 return nil
             }
 
-            let next = bible.search(string, offset: current, count: chunks)
+            let next = bible.search(string, offset: current, count: chunks, surround: surround)
             current += next.count
             return next
         }

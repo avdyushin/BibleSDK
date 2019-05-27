@@ -12,7 +12,7 @@ public protocol BibleProtocol {
     func book(id: Book.BookId) -> Book?
     func verses(bookId: Book.BookId, chapters: IndexSet, verses: IndexSet) -> [Verse]
     func searchCount(_ string: String) -> Int
-    func search(_ string: String, offset: Int, count: Int) -> [Verse]
+    func search(_ string: String, offset: Int, count: Int, surround: (String, String)?) -> [Verse]
     subscript(id: Book.BookId) -> Book? { get }
     subscript(name: String) -> Book? { get }
 }
@@ -107,18 +107,28 @@ class Bible: BibleProtocol {
         }
     }
 
-    func search(_ string: String, offset: Int, count: Int) -> [Verse] {
+    func search(_ string: String, offset: Int, count: Int, surround: (String, String)?) -> [Verse] {
         let string = string.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+        let text: String
+        if let (prefix, suffix) = surround {
+            text = "highlight(\(version)_bible_index, 3, '\(prefix)', '\(suffix)') as text"
+        } else {
+            text = "text"
+        }
+
         let query =
         """
         SELECT
-            book_id, verse, chapter, text
+            book_id, verse, chapter, \(text)
         FROM
             \(version)_bible_index
         WHERE
             text
         MATCH
             '\(string)'
+        ORDER BY
+            rank
         LIMIT
             \(offset), \(count);
         """
