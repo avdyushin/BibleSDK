@@ -191,5 +191,6 @@ class BibleSDK_iOS_Tests: XCTestCase {
         let s = b.searchIterator("for god so loved", version: "kjv", chunks: 1, surround: ("<b>", "</b>"))
         let r = s.next()!.first!
         XCTAssertEqual(r.text, "<b>For</b> <b>God</b> <b>so</b> <b>loved</b> the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.")
+        XCTAssertEqual(r.bookName, "John")
     }
 }

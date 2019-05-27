@@ -14,6 +14,8 @@ public struct Verse: Hashable, Equatable {
     public typealias VerseIndex = Int
 
     public let book: Book.BookId
+    public let bookName: String?
+    public let bookAlt: String?
     public let chapter: ChapterIndex
     public let number: VerseIndex
     public let text: String
@@ -23,6 +25,8 @@ extension Verse {
     init(row: Row) {
         self.init(
             book: row["book_id"]!,
+            bookName: row["book_name"],
+            bookAlt: row["book_alt"],
             chapter: row["chapter"]!,
             number: row["verse"]!,
             text: row["text"]!

@@ -120,9 +120,10 @@ class Bible: BibleProtocol {
         let query =
         """
         SELECT
-            book_id, verse, chapter, \(text)
+            v.book_id, v.verse, v.chapter, \(text), b.book as book_name, b.alt as book_alt
         FROM
-            \(version)_bible_index
+            \(version)_bible_index v
+        LEFT OUTER JOIN \(version)_bible_books b on (v.book_id = b.id)
         WHERE
             text
         MATCH
