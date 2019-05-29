@@ -160,7 +160,7 @@ class BibleSDK_iOS_Tests: XCTestCase {
 
     func testSearchIteratorChunks() {
         let b = BibleSDK()
-        let i = b.bibleContainer.searchIterator("For god", version: Version("kjv"), chunks: 8)
+        let i = b.bibleContainer.searchIterator("For god", version: "kjv", chunks: 8)
         let c = b.bibleContainer.searchCount("For god")["kjv"] ?? 0
         let counts = time { Set(i.map { $0.count }) }
         XCTAssertEqual(counts.sorted(), [c % 8, 8])
@@ -175,7 +175,7 @@ class BibleSDK_iOS_Tests: XCTestCase {
 
     func testSearchSurround() {
         let b = BibleSDK()
-        let s = b.searchIterator("for god so loved", version: Version("kjv"), chunks: 1, surround: ("<b>", "</b>"))
+        let s = b.searchIterator("for god so loved", version: "kjv", chunks: 1, surround: ("<b>", "</b>"))
         let r = s.next()!.first!
         XCTAssertEqual(r.text, "<b>For</b> <b>God</b> <b>so</b> <b>loved</b> the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.")
         XCTAssertEqual(r.bookName, "John")

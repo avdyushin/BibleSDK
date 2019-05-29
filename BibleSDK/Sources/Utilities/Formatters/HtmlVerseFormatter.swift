@@ -44,6 +44,20 @@ open class HtmlVerseFormatter: PlainTextVerseFormatter {
         return "$1<i>$3</i>"
     }
 
+    open override class func format(verse: Verse, style: VerseFormatStyle = .none) -> NSAttributedString {
+        var result = verse.text.replacingOccurrences(of: "--", with: "—")
+        result = regexpUnderline.replace(result, withTemplate: underlineTemplate)
+        switch style {
+        case .chapterAndVerse:
+            result = "<small>\(verse.chapter):\(verse.number)</small> \(result)"
+        case .verseNumber:
+            result = "<small>\(verse.number)</small> \(result)"
+        case .none:
+            ()
+        }
+        return NSAttributedString(string: result)
+    }
+
     open override class func convert(verses: [Verse], style: VerseFormatStyle = .none) -> NSAttributedString {
         let string = verses
             .map { "<p>\(format(verse: $0, style: style).string)</p>" }

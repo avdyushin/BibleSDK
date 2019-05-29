@@ -13,10 +13,10 @@ open class SearchResultVerseFormatter: AttributedStringVerseFormatter {
     static let regexpSpan = try! Regex(pattern: ".*?<span>(.*?)<\\/span>.*?", options: [.caseInsensitive])
 
     open override class func format(verse: Verse, style: VerseFormatStyle = .none) -> NSAttributedString {
-        let string = AttributedStringVerseFormatter.format(verse: verse, style: style).string
-        let result = NSMutableAttributedString(string: string)
+        let attributed = AttributedStringVerseFormatter.format(verse: verse, style: style)
+        let result = NSMutableAttributedString(attributedString: attributed)
 
-        regexpSpan.matches(result.string, options: [], range: NSRange(string.startIndex..., in: string)).forEach {
+        regexpSpan.matches(result.string, options: [], range: NSRange(attributed.string.startIndex..., in: attributed.string)).forEach {
             result.addAttribute(
                 NSAttributedString.Key.backgroundColor,
                 value: UIColor(hex: 0xfff2a8) as Any,
