@@ -7,15 +7,15 @@
 
 import Foundation
 
-public class PlainTextVerseFormatter: VerseFormattable {
+open class PlainTextVerseFormatter: VerseFormattable {
 
     static let regexpUnderline = try! Regex(pattern: "(\\s+|^)(_)(.+?)(\\2)")
 
-    class var underlineTemplate: String {
+    open class var underlineTemplate: String {
         return "$1$3"
     }
 
-    public class func format(verse: Verse, style: VerseFormatStyle = .none) -> NSAttributedString {
+    open class func format(verse: Verse, style: VerseFormatStyle = .none) -> NSAttributedString {
         var result = verse.text.replacingOccurrences(of: "--", with: "—")
         result = regexpUnderline.replace(result, withTemplate: underlineTemplate)
         switch style {
@@ -29,7 +29,7 @@ public class PlainTextVerseFormatter: VerseFormattable {
         return NSAttributedString(string: result)
     }
 
-    public class func convert(verses: [Verse], style: VerseFormatStyle = .none) -> NSAttributedString {
+    open class func convert(verses: [Verse], style: VerseFormatStyle = .none) -> NSAttributedString {
         let result = verses
             .map { format(verse: $0, style: style).string }
             .joined(separator: "\n")

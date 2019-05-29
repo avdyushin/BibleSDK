@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class SearchResultVerseFormatter: AttributedStringVerseFormatter {
+open class SearchResultVerseFormatter: AttributedStringVerseFormatter {
 
     static let regexpSpan = try! Regex(pattern: ".*?<span>(.*?)<\\/span>.*?", options: [.caseInsensitive])
 
-    public override class func format(verse: Verse, style: VerseFormatStyle = .none) -> NSAttributedString {
+    open override class func format(verse: Verse, style: VerseFormatStyle = .none) -> NSAttributedString {
         let string = AttributedStringVerseFormatter.format(verse: verse, style: style).string
         let result = NSMutableAttributedString(string: string)
 
@@ -35,7 +35,7 @@ public class SearchResultVerseFormatter: AttributedStringVerseFormatter {
         return result
     }
 
-    public override class func convert(verses: [Verse], style: VerseFormatStyle = .none) -> NSAttributedString {
+    open override class func convert(verses: [Verse], style: VerseFormatStyle = .none) -> NSAttributedString {
         let result = NSMutableAttributedString()
         verses.forEach {
             result.append(format(verse: $0, style: style))

@@ -8,9 +8,9 @@
 import UIKit
 import Foundation
 
-public class AttributedStringVerseFormatter: PlainTextVerseFormatter {
+open class AttributedStringVerseFormatter: PlainTextVerseFormatter {
 
-    public override class func format(verse: Verse, style: VerseFormatStyle = .none) -> NSAttributedString {
+    open override class func format(verse: Verse, style: VerseFormatStyle = .none) -> NSAttributedString {
         let result = NSMutableAttributedString(
             attributedString: PlainTextVerseFormatter.format(verse: verse, style: style)
         )
@@ -35,7 +35,7 @@ public class AttributedStringVerseFormatter: PlainTextVerseFormatter {
         return result
     }
 
-    public override class func convert(verses: [Verse], style: VerseFormatStyle = .none) -> NSAttributedString {
+    open override class func convert(verses: [Verse], style: VerseFormatStyle = .none) -> NSAttributedString {
         let result = NSMutableAttributedString()
         verses.forEach {
             result.append(format(verse: $0, style: style))

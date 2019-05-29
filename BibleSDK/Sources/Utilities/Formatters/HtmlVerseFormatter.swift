@@ -7,9 +7,9 @@
 
 import UIKit
 
-public class HtmlVerseFormatter: PlainTextVerseFormatter {
+open class HtmlVerseFormatter: PlainTextVerseFormatter {
 
-    public class var headerTemplate: String {
+    open class var headerTemplate: String {
         return """
         <!DOCTYPE html><html><head>
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
@@ -36,15 +36,15 @@ public class HtmlVerseFormatter: PlainTextVerseFormatter {
         """
     }
 
-    public class var footerTemplate: String {
+    open class var footerTemplate: String {
         return "</body></html>"
     }
 
-    override class var underlineTemplate: String {
+    open override class var underlineTemplate: String {
         return "$1<i>$3</i>"
     }
 
-    public override class func convert(verses: [Verse], style: VerseFormatStyle = .none) -> NSAttributedString {
+    open override class func convert(verses: [Verse], style: VerseFormatStyle = .none) -> NSAttributedString {
         let string = verses
             .map { "<p>\(format(verse: $0, style: style).string)</p>" }
             .joined(separator: "")
