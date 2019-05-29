@@ -25,13 +25,6 @@ open class AttributedStringVerseFormatter: PlainTextVerseFormatter {
         case .none:
             ()
         }
-        // Dynamic font support
-//        result.addAttributes(
-//            [
-//                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline)
-//            ],
-//            range: NSRange.init(location: 0, length: result.length)
-//        )
         return result
     }
 

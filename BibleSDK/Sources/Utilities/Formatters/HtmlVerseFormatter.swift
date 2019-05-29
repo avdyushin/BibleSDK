@@ -56,18 +56,6 @@ open class HtmlVerseFormatter: PlainTextVerseFormatter {
                       .characterEncoding: String.Encoding.utf8.rawValue],
             documentAttributes: nil
         )
-        let results = NSMutableAttributedString(attributedString: attributed)
-        // Dynamic font support
-//        let font = UIFontMetrics(forTextStyle: .subheadline)
-//            .scaledFont(for: UIFont(name: "Georgia", size: 20)!)
-//        // TODO: Fix locale
-//        results.addAttributes(
-//            [
-//                NSAttributedString.Key.init("locale"): "ru",
-//                NSAttributedString.Key.font: font
-//            ],
-//            range: NSRange.init(location: 0, length: attributed.length)
-//        )
-        return results
+        return NSMutableAttributedString(attributedString: attributed)
     }
 }
