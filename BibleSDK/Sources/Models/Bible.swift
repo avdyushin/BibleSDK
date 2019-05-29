@@ -91,7 +91,7 @@ class Bible: BibleProtocol {
         SELECT
             COUNT(*)
         FROM
-            \(version)_bible_index
+            \(version.identifier)_bible_index
         WHERE
             text
         MATCH
@@ -112,7 +112,7 @@ class Bible: BibleProtocol {
 
         let text: String
         if let (prefix, suffix) = surround {
-            text = "highlight(\(version)_bible_index, 3, '\(prefix)', '\(suffix)') as text"
+            text = "highlight(\(version.identifier)_bible_index, 3, '\(prefix)', '\(suffix)') as text"
         } else {
             text = "text"
         }
@@ -122,8 +122,8 @@ class Bible: BibleProtocol {
         SELECT
             v.book_id, v.verse, v.chapter, \(text), b.book as book_name, b.alt as book_alt
         FROM
-            \(version)_bible_index v
-        LEFT OUTER JOIN \(version)_bible_books b on (v.book_id = b.id)
+            \(version.identifier)_bible_index v
+        LEFT OUTER JOIN \(version.identifier)_bible_books b on (v.book_id = b.id)
         WHERE
             text
         MATCH
@@ -157,7 +157,7 @@ class Bible: BibleProtocol {
         SELECT
             book_id, verse, chapter, text
         FROM
-            \(version)_bible
+            \(version.identifier)_bible
         WHERE
             \(condition);
         """
@@ -173,16 +173,16 @@ class Bible: BibleProtocol {
         let query =
         """
         SELECT
-            \(version)_bible_books.id,
-            \(version)_bible_books.idx,
-            \(version)_bible_books.book AS title,
-            \(version)_bible_books.alt,
-            \(version)_bible_books.abbr,
+            \(version.identifier)_bible_books.id,
+            \(version.identifier)_bible_books.idx,
+            \(version.identifier)_bible_books.book AS title,
+            \(version.identifier)_bible_books.alt,
+            \(version.identifier)_bible_books.abbr,
             (SELECT
-                COUNT(DISTINCT \(version)_bible.chapter)
-            FROM \(version)_bible
-            WHERE \(version)_bible.book_id = \(version)_bible_books.id) AS chapters
-        FROM \(version)_bible_books;
+                COUNT(DISTINCT \(version.identifier)_bible.chapter)
+            FROM \(version.identifier)_bible
+            WHERE \(version.identifier)_bible.book_id = \(version.identifier)_bible_books.id) AS chapters
+        FROM \(version.identifier)_bible_books;
         """
 
         return try storage.fetch(query).map(Book.init)

@@ -13,6 +13,10 @@ public class BibleSDK {
     let bibleContainer = BibleContainer()
     let dailyContainer: DailyContainer
 
+    public var availableVersions: [Version] {
+        return bibleContainer.availableVersions
+    }
+
     public subscript(version: Version) -> BibleProtocol? {
         return bibleContainer[version]
     }
@@ -34,7 +38,7 @@ public class BibleSDK {
     public func dailyReading(_ date: Date = Date(), version: Version) -> VerseByReference  {
         let references = dailyContainer
             .dailyReferences(date)
-            .reduce([], { $0.contains($1) ? $0 : $0 + [$1]} )
+            .reduce([], { $0.contains($1) ? $0 : $0 + [$1] })
             .compactMap { bibleContainer.references(raw: $0, version: version) }
 
         guard !references.isEmpty else {
@@ -52,7 +56,7 @@ public class BibleSDK {
     public func findByReference(_ string: String) -> VerseByReference {
         let references = abbreviation
             .matches(string)
-            .reduce([], { $0.contains($1) ? $0 : $0 + [$1]} )
+            .reduce([], { $0.contains($1) ? $0 : $0 + [$1] })
             .compactMap { bibleContainer.references(raw: $0) }
 
         guard !references.isEmpty else {

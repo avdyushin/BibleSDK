@@ -152,19 +152,6 @@ class BibleSDK_iOS_Tests: XCTestCase {
         dump(verses)
     }
 
-    func testConverter() {
-        let b = BibleSDK()
-        let v = b.findByReference("Gen 1:2-4")
-        let c = VerseConverter<PlainTextVerseConverter>()
-        let s = c.convert(verses: v.first!.value, styles: [.numbers(.verse)])
-        XCTAssertEqual(s.string,
-        """
-        2 And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.
-        3 And God said, Let there be light: and there was light.
-        4 And God saw the light, that it was good: and God divided the light from the darkness.
-        """)
-    }
-
     func testSearchCount() {
         let b = BibleSDK()
         let c = time { b.bibleContainer.searchCount("For god") }
@@ -173,7 +160,7 @@ class BibleSDK_iOS_Tests: XCTestCase {
 
     func testSearchIteratorChunks() {
         let b = BibleSDK()
-        let i = b.bibleContainer.searchIterator("For god", version: "kjv", chunks: 8)
+        let i = b.bibleContainer.searchIterator("For god", version: Version("kjv"), chunks: 8)
         let c = b.bibleContainer.searchCount("For god")["kjv"] ?? 0
         let counts = time { Set(i.map { $0.count }) }
         XCTAssertEqual(counts.sorted(), [c % 8, 8])
@@ -188,7 +175,7 @@ class BibleSDK_iOS_Tests: XCTestCase {
 
     func testSearchSurround() {
         let b = BibleSDK()
-        let s = b.searchIterator("for god so loved", version: "kjv", chunks: 1, surround: ("<b>", "</b>"))
+        let s = b.searchIterator("for god so loved", version: Version("kjv"), chunks: 1, surround: ("<b>", "</b>"))
         let r = s.next()!.first!
         XCTAssertEqual(r.text, "<b>For</b> <b>God</b> <b>so</b> <b>loved</b> the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.")
         XCTAssertEqual(r.bookName, "John")

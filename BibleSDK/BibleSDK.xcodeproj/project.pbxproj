@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		4B0871B6228C6F1C00621C5E /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0871B5228C6F1C00621C5E /* Version.swift */; };
 		4B0871B7228C6F1C00621C5E /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0871B5228C6F1C00621C5E /* Version.swift */; };
+		4B49C05D229EFD7900F42CF2 /* HtmlVerseFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C05C229EFD7900F42CF2 /* HtmlVerseFormatter.swift */; };
+		4B49C05E229EFD7900F42CF2 /* HtmlVerseFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C05C229EFD7900F42CF2 /* HtmlVerseFormatter.swift */; };
+		4B49C061229EFEAF00F42CF2 /* AttributedStringVerseFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C060229EFEAF00F42CF2 /* AttributedStringVerseFormatter.swift */; };
+		4B49C062229EFEAF00F42CF2 /* AttributedStringVerseFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C060229EFEAF00F42CF2 /* AttributedStringVerseFormatter.swift */; };
+		4B49C065229EFEDA00F42CF2 /* PlainTextVerseFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C064229EFEDA00F42CF2 /* PlainTextVerseFormatter.swift */; };
+		4B49C066229EFEDA00F42CF2 /* PlainTextVerseFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C064229EFEDA00F42CF2 /* PlainTextVerseFormatter.swift */; };
+		4B49C069229F056000F42CF2 /* PlainTextFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C068229F056000F42CF2 /* PlainTextFormatterTests.swift */; };
+		4B49C06D229F094C00F42CF2 /* SearchStringVerseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C06C229F094C00F42CF2 /* SearchStringVerseConverter.swift */; };
+		4B49C06E229F094C00F42CF2 /* SearchStringVerseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C06C229F094C00F42CF2 /* SearchStringVerseConverter.swift */; };
 		4B8AFF8122849C5B00D55F7D /* BibleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */; };
 		4B8AFF8222849C5B00D55F7D /* BibleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */; };
 		4B8AFF8422849CB100D55F7D /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8322849CB100D55F7D /* Container.swift */; };
@@ -86,6 +95,11 @@
 
 /* Begin PBXFileReference section */
 		4B0871B5228C6F1C00621C5E /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		4B49C05C229EFD7900F42CF2 /* HtmlVerseFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlVerseFormatter.swift; sourceTree = "<group>"; };
+		4B49C060229EFEAF00F42CF2 /* AttributedStringVerseFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStringVerseFormatter.swift; sourceTree = "<group>"; };
+		4B49C064229EFEDA00F42CF2 /* PlainTextVerseFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextVerseFormatter.swift; sourceTree = "<group>"; };
+		4B49C068229F056000F42CF2 /* PlainTextFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextFormatterTests.swift; sourceTree = "<group>"; };
+		4B49C06C229F094C00F42CF2 /* SearchStringVerseConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStringVerseConverter.swift; sourceTree = "<group>"; };
 		4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleContainer.swift; sourceTree = "<group>"; };
 		4B8AFF8322849CB100D55F7D /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		4B8AFF8622849D3200D55F7D /* DailyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyContainer.swift; sourceTree = "<group>"; };
@@ -179,6 +193,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B49C05B229EFD4000F42CF2 /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				4B49C064229EFEDA00F42CF2 /* PlainTextVerseFormatter.swift */,
+				4B49C05C229EFD7900F42CF2 /* HtmlVerseFormatter.swift */,
+				4B49C060229EFEAF00F42CF2 /* AttributedStringVerseFormatter.swift */,
+				4B49C06C229F094C00F42CF2 /* SearchStringVerseConverter.swift */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
 		4BC6D82922789E5B00FF0A03 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +222,7 @@
 				4BC6D889227A1A3500FF0A03 /* StorageTest.swift */,
 				4B8AFF8C2284A0CE00D55F7D /* BibleContainerTests.swift */,
 				4BC6D8302279958800FF0A03 /* BibleSDK_iOS_Tests.swift */,
+				4B49C068229F056000F42CF2 /* PlainTextFormatterTests.swift */,
 				4BC6D8322279958800FF0A03 /* Info.plist */,
 			);
 			path = "BibleSDK iOS Tests";
@@ -240,6 +266,7 @@
 		4BC6D873227A0C0A00FF0A03 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				4B49C05B229EFD4000F42CF2 /* Formatters */,
 				4BC6D874227A0C2400FF0A03 /* Regex.swift */,
 				4BC6D879227A11C000FF0A03 /* Abbreviation.swift */,
 				4BC6D886227A1A0300FF0A03 /* Storage.swift */,
@@ -583,6 +610,7 @@
 				4BC6D88A227A1A3500FF0A03 /* StorageTest.swift in Sources */,
 				4BC6D8312279958800FF0A03 /* BibleSDK_iOS_Tests.swift in Sources */,
 				4B8AFF8D2284A0CE00D55F7D /* BibleContainerTests.swift in Sources */,
+				4B49C069229F056000F42CF2 /* PlainTextFormatterTests.swift in Sources */,
 				4BC6D883227A148700FF0A03 /* AbbriviationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,18 +645,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B49C061229EFEAF00F42CF2 /* AttributedStringVerseFormatter.swift in Sources */,
 				4B8AFF8122849C5B00D55F7D /* BibleContainer.swift in Sources */,
 				4BC6D82622789C6400FF0A03 /* Main.swift in Sources */,
 				4B8AFF8722849D3200D55F7D /* DailyContainer.swift in Sources */,
+				4B49C06D229F094C00F42CF2 /* SearchStringVerseConverter.swift in Sources */,
 				4BCB3062228DDA4300AEE1D1 /* Colors.swift in Sources */,
 				4BC6D87A227A11C000FF0A03 /* Abbreviation.swift in Sources */,
 				4BCB305E228DD96B00AEE1D1 /* VerseFormatter.swift in Sources */,
 				4BC6D875227A0C2400FF0A03 /* Regex.swift in Sources */,
 				4BC6D880227A12C700FF0A03 /* Book.swift in Sources */,
 				4BC6D87D227A120100FF0A03 /* Verse.swift in Sources */,
+				4B49C05D229EFD7900F42CF2 /* HtmlVerseFormatter.swift in Sources */,
 				4B8AFF8422849CB100D55F7D /* Container.swift in Sources */,
 				4B8AFF8A22849D8000D55F7D /* Bible.swift in Sources */,
 				4B0871B6228C6F1C00621C5E /* Version.swift in Sources */,
+				4B49C065229EFEDA00F42CF2 /* PlainTextVerseFormatter.swift in Sources */,
 				4BC6D887227A1A0300FF0A03 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,18 +669,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B49C062229EFEAF00F42CF2 /* AttributedStringVerseFormatter.swift in Sources */,
 				4B8AFF8222849C5B00D55F7D /* BibleContainer.swift in Sources */,
 				4BC6D82722789C6700FF0A03 /* Main.swift in Sources */,
 				4B8AFF8822849D3200D55F7D /* DailyContainer.swift in Sources */,
+				4B49C06E229F094C00F42CF2 /* SearchStringVerseConverter.swift in Sources */,
 				4BCB3063228DDA4300AEE1D1 /* Colors.swift in Sources */,
 				4BC6D87B227A11C000FF0A03 /* Abbreviation.swift in Sources */,
 				4BCB305F228DD96B00AEE1D1 /* VerseFormatter.swift in Sources */,
 				4BC6D876227A0C2400FF0A03 /* Regex.swift in Sources */,
 				4BC6D881227A12C700FF0A03 /* Book.swift in Sources */,
 				4BC6D87E227A120100FF0A03 /* Verse.swift in Sources */,
+				4B49C05E229EFD7900F42CF2 /* HtmlVerseFormatter.swift in Sources */,
 				4B8AFF8522849CB100D55F7D /* Container.swift in Sources */,
 				4B8AFF8B22849D8000D55F7D /* Bible.swift in Sources */,
 				4B0871B7228C6F1C00621C5E /* Version.swift in Sources */,
+				4B49C066229EFEDA00F42CF2 /* PlainTextVerseFormatter.swift in Sources */,
 				4BC6D888227A1A0300FF0A03 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

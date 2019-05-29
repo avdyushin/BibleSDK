@@ -11,10 +11,12 @@ public struct Version: Hashable, ExpressibleByStringLiteral {
 
     let identifier: String
     let abbr: String
+    let locale: String?
 
-    public init(_ name: String) {
-        self.identifier = name
+    public init(_ name: String, locale: String? = nil) {
+        self.identifier = name.lowercased()
         self.abbr = self.identifier.uppercased()
+        self.locale = locale
     }
 
     public init(stringLiteral value: String) {
@@ -24,6 +26,6 @@ public struct Version: Hashable, ExpressibleByStringLiteral {
 
 extension Version: CustomStringConvertible {
     public var description: String {
-        return identifier
+        return "\(identifier) \(abbr) \(String(describing: locale))"
     }
 }
