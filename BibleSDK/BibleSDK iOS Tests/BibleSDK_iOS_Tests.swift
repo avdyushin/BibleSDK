@@ -19,9 +19,19 @@ import XCTest
 
 class BibleSDK_iOS_Tests: XCTestCase {
 
+
     func testVersion() {
         let v: Version = "kjv"
-        XCTAssertEqual(v.abbr, "KJV")
+        XCTAssertEqual(v.identifier, "kjv")
+        XCTAssertEqual(v.name, "KJV")
+        XCTAssertNil(v.locale)
+    }
+
+    func testVersionWithLocale() {
+        let v: Version = "kjv:en_US"
+        XCTAssertEqual(v.identifier, "kjv")
+        XCTAssertEqual(v.name, "KJV")
+        XCTAssertEqual(v.locale, "en_US")
     }
 
     func testDaily() {

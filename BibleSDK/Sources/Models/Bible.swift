@@ -22,7 +22,7 @@ public struct BibleReference: Hashable, Comparable {
     public let reference: Verse.Reference
 
     public static func < (lhs: BibleReference, rhs: BibleReference) -> Bool {
-        return lhs.version.abbr.compare(rhs.version.abbr) == .orderedAscending &&
+        return lhs.version.identifier.compare(rhs.version.identifier) == .orderedAscending &&
             lhs.reference.book.id < rhs.reference.book.id
     }
 }

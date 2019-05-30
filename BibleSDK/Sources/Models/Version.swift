@@ -10,13 +10,20 @@ import UIKit
 public struct Version: Hashable, ExpressibleByStringLiteral {
 
     public let identifier: String
-    public let abbr: String
+    public let name: String
     public let locale: String?
 
-    public init(_ name: String, locale: String? = nil) {
-        self.identifier = name.lowercased()
-        self.abbr = self.identifier.uppercased()
-        self.locale = locale
+    public init(_ identifier: String) {
+        let components = identifier.split(separator: ":").map(String.init)
+        if components.count == 2 {
+            self.identifier = components[0]
+            self.name = components[0].uppercased()
+            self.locale = components[1]
+        } else {
+            self.identifier = identifier.lowercased()
+            self.name = identifier.uppercased()
+            self.locale = nil
+        }
     }
 
     public init(stringLiteral value: String) {
@@ -26,6 +33,6 @@ public struct Version: Hashable, ExpressibleByStringLiteral {
 
 extension Version: CustomStringConvertible {
     public var description: String {
-        return "\(identifier) \(abbr) \(String(describing: locale))"
+        return "\(identifier) \(name) \(String(describing: locale))"
     }
 }
