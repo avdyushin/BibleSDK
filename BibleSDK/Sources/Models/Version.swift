@@ -33,6 +33,6 @@ public struct Version: Hashable, ExpressibleByStringLiteral {
 
 extension Version: CustomStringConvertible {
     public var description: String {
-        return "\(identifier) \(name) \(String(describing: locale))"
+        return "id: \(identifier) name: \(name) locale: \(locale ?? "none"))"
     }
 }
