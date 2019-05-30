@@ -9,9 +9,9 @@ import UIKit
 
 public struct Version: Hashable, ExpressibleByStringLiteral {
 
-    let identifier: String
-    let abbr: String
-    let locale: String?
+    public let identifier: String
+    public let abbr: String
+    public let locale: String?
 
     public init(_ name: String, locale: String? = nil) {
         self.identifier = name.lowercased()
