@@ -8,11 +8,28 @@
 import UIKit
 import Foundation
 
+extension Array where Element == NSAttributedString {
+
+    func joined(_ separator: Element) -> Element {
+        let result = NSMutableAttributedString()
+        var iter = makeIterator()
+        if let first = iter.next() {
+            result.append(first)
+            while let next = iter.next() {
+                result.append(separator)
+                result.append(next)
+            }
+        }
+        return result
+    }
+}
+
 open class AttributedStringVerseFormatter: PlainTextVerseFormatter {
 
     open override class func format(verse: Verse, style: VerseFormatStyle = .none) -> NSAttributedString {
+        let string = verse.text.replacingOccurrences(of: "--", with: "—")
         let result = NSMutableAttributedString(
-            attributedString: PlainTextVerseFormatter.format(verse: verse, style: style)
+            string: regexpUnderline.replace(string, withTemplate: underlineTemplate)
         )
         let attributes = [NSAttributedString.Key.foregroundColor: UIColor(hex: 0xaaaaaa)]
         switch style {
@@ -29,10 +46,8 @@ open class AttributedStringVerseFormatter: PlainTextVerseFormatter {
     }
 
     open override class func convert(verses: [Verse], style: VerseFormatStyle = .none) -> NSAttributedString {
-        let result = NSMutableAttributedString()
-        verses.forEach {
-            result.append(format(verse: $0, style: style))
-        }
-        return result
+        return verses
+            .map { format(verse: $0, style: style) }
+            .joined(NSAttributedString(string: "\n"))
     }
 }
