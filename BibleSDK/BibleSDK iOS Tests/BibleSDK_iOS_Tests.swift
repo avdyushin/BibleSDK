@@ -148,13 +148,20 @@ class BibleSDK_iOS_Tests: XCTestCase {
         XCTAssertNoThrow(try b.bibleContainer.load(version: Version("rst"), path: path))
         let verses = b.findByReference("Gen 1:1 Быт 1:1")
         XCTAssertEqual(verses.keys.count, 2)
-        dump(verses)
+    }
+
+    func testFetchByRefsNotFound() {
+        let b = BibleSDK()
+        let path = Bundle(for: type(of: self)).path(forResource: "rst", ofType: "db")!
+        XCTAssertNoThrow(try b.bibleContainer.load(version: Version("rst"), path: path))
+        let verses = b.findByReference("Gen 100")
+        XCTAssertTrue(verses.keys.isEmpty)
     }
 
     func testSearchCount() {
         let b = BibleSDK()
         let c = time { b.bibleContainer.searchCount("For god") }
-        debugPrint(c)
+        XCTAssertEqual(c["kjv"], 1265)
     }
 
     func testSearchIteratorChunks() {
