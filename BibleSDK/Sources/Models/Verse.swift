@@ -36,12 +36,12 @@ extension Verse {
 
 public extension Verse {
 
-    struct Location: Hashable, Equatable, CustomDebugStringConvertible {
+    struct Location: Hashable, Equatable, CustomStringConvertible {
 
         public let chapters: IndexSet
         public let verses: IndexSet
 
-        public var debugDescription: String {
+        public var description: String {
             let c = chapters.compactMap { "\($0)" }.joined(separator: ",")
             let v = verses.compactMap { "\($0)" }.joined(separator: ",")
             return "\(c):\(v)"

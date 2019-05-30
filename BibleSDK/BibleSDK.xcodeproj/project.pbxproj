@@ -19,6 +19,7 @@
 		4B49C06D229F094C00F42CF2 /* SearchStringVerseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C06C229F094C00F42CF2 /* SearchStringVerseConverter.swift */; };
 		4B49C06E229F094C00F42CF2 /* SearchStringVerseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C06C229F094C00F42CF2 /* SearchStringVerseConverter.swift */; };
 		4B49C072229F1A3F00F42CF2 /* AttributedFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C071229F1A3F00F42CF2 /* AttributedFormatterTests.swift */; };
+		4B49C07522A02E5B00F42CF2 /* DailyContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C07422A02E5B00F42CF2 /* DailyContainerTests.swift */; };
 		4B8AFF8122849C5B00D55F7D /* BibleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */; };
 		4B8AFF8222849C5B00D55F7D /* BibleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */; };
 		4B8AFF8422849CB100D55F7D /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AFF8322849CB100D55F7D /* Container.swift */; };
@@ -102,6 +103,7 @@
 		4B49C068229F056000F42CF2 /* PlainTextFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextFormatterTests.swift; sourceTree = "<group>"; };
 		4B49C06C229F094C00F42CF2 /* SearchStringVerseConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStringVerseConverter.swift; sourceTree = "<group>"; };
 		4B49C071229F1A3F00F42CF2 /* AttributedFormatterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedFormatterTests.swift; sourceTree = "<group>"; };
+		4B49C07422A02E5B00F42CF2 /* DailyContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyContainerTests.swift; sourceTree = "<group>"; };
 		4B8AFF8022849C5B00D55F7D /* BibleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleContainer.swift; sourceTree = "<group>"; };
 		4B8AFF8322849CB100D55F7D /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		4B8AFF8622849D3200D55F7D /* DailyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyContainer.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				4BC6D882227A148700FF0A03 /* AbbriviationTests.swift */,
 				4BC6D889227A1A3500FF0A03 /* StorageTest.swift */,
 				4B8AFF8C2284A0CE00D55F7D /* BibleContainerTests.swift */,
+				4B49C07422A02E5B00F42CF2 /* DailyContainerTests.swift */,
 				4BC6D8302279958800FF0A03 /* BibleSDK_iOS_Tests.swift */,
 				4B49C068229F056000F42CF2 /* PlainTextFormatterTests.swift */,
 				4B49C071229F1A3F00F42CF2 /* AttributedFormatterTests.swift */,
@@ -614,6 +617,7 @@
 				4BC6D8312279958800FF0A03 /* BibleSDK_iOS_Tests.swift in Sources */,
 				4B49C072229F1A3F00F42CF2 /* AttributedFormatterTests.swift in Sources */,
 				4B8AFF8D2284A0CE00D55F7D /* BibleContainerTests.swift in Sources */,
+				4B49C07522A02E5B00F42CF2 /* DailyContainerTests.swift in Sources */,
 				4B49C069229F056000F42CF2 /* PlainTextFormatterTests.swift in Sources */,
 				4BC6D883227A148700FF0A03 /* AbbriviationTests.swift in Sources */,
 			);

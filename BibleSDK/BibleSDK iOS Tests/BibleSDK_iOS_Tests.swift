@@ -36,19 +36,6 @@ class BibleSDK_iOS_Tests: XCTestCase {
         XCTAssertEqual(v.description, "kjv(KJV) en_US")
     }
 
-    func testDaily() {
-        let b = BibleSDK()
-        let refs = b.dailyContainer.dailyReferences(Date(timeIntervalSince1970: 123123123))
-        XCTAssertEqual(refs.count, 14)
-    }
-
-    func testConversion() {
-        let b = BibleSDK()
-        let refs = b.dailyContainer.dailyReferences(Date(timeIntervalSince1970: 123123123))
-        let conv = refs.map { b.bibleContainer.references(raw: $0) }
-        XCTAssertEqual(refs.count, conv.count)
-    }
-
     func testAllDailies() {
         let b = BibleSDK()
         let v = b.bibleContainer.availableVersions.first { $0.identifier == "kjv" }!
