@@ -8,7 +8,10 @@
 
 import Foundation
 
+/// Bible Abbreviation (Verses Reference)
 public protocol Abbreviation {
+    /// Returns a list of parsed Raw Bible Verse References by given string
+    /// - Parameter string: A Bible reference string ex. `Gen 1:1,2-4`
     func matches(_ string: String) -> [Verse.RawReference]
 }
 

@@ -5,6 +5,8 @@
 //  Created by Grigory Avdyushin on 15/05/2019.
 //
 
+/// Reference to the Month, Day and Morning/Evening
+/// Used for the Daily Bible Verses
 struct Daily {
     let month: Int
     let day: Int
@@ -25,7 +27,8 @@ extension Daily {
 
 class DailyContainer: Container<BaseSqliteStorage> {
 
-    let abbreviation: Abbreviation
+    fileprivate let abbreviation: Abbreviation
+    
     init(storage: BaseSqliteStorage, abbreviation: Abbreviation) {
         self.abbreviation = abbreviation
         super.init(storage: storage)

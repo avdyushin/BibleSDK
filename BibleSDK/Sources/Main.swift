@@ -31,10 +31,20 @@ public class BibleSDK {
         self.dailyContainer = DailyContainer(storage: storage, abbreviation: abbreviation)
     }
 
+    /// Loads Bible database
+    /// - Parameters:
+    ///     - version: Bible Version (Translation)
+    ///     - filename: Path to SQLite Database file
+    ///
+    /// - Throws: An error if file not found
     public func load(version: Version, filename: String) throws {
         try bibleContainer.load(version: version, path: filename)
     }
 
+    /// Returns Daily Reading Verses for given date and version
+    /// - Parameters:
+    ///     - data: The date to return daily reading
+    ///     - version: The Bible Version to fetch daily reading from
     public func dailyReading(_ date: Date = Date(), version: Version) -> VerseByReference  {
         let references = dailyContainer
             .dailyReferences(date)
@@ -53,6 +63,8 @@ public class BibleSDK {
         return Dictionary(uniqueKeysWithValues: zip(references, verses))
     }
 
+    /// Returns Verses by given Bible string reference
+    /// - Parameter string: A Bible string reference like `Gen 1:1-2`
     public func findByReference(_ string: String) -> VerseByReference {
         let references = abbreviation
             .matches(string)
@@ -70,6 +82,12 @@ public class BibleSDK {
         return Dictionary(uniqueKeysWithValues: zip(references, verses))
     }
 
+    /// Returns Verses by given book, chapter(s) and verses numbers
+    /// - Parameters:
+    ///     - book: A Book to fetch Verses from
+    ///     - chapters: A Chapters index(es)
+    ///     - verses: A Verses index(es)
+    ///     - version: A Bible Version
     public func versesByBook(_ book: Book, chapters: IndexSet = [], verses: IndexSet = [], version: Version) -> VerseByReference {
         let bookReference = BibleReference(
             version: version,
@@ -82,10 +100,21 @@ public class BibleSDK {
         return [bookReference: verses]
     }
 
+    /// Returns search results count
+    /// - Parameter string: A search string
+    ///
+    /// - Returns: A Dictionary with Version as a Key and count as a Value
     public func searchCount(_ string: String) -> [Version: Int] {
         return bibleContainer.searchCount(string)
     }
 
+    /// Returns search iterator for given string
+    /// - Parameters:
+    ///     - string: A search string
+    ///     - version: A Bible Version
+    ///     - chunks: A number of batch items to fetch in one call
+    ///     - surround: A prefix and suffix to surrdoun search string in results
+    /// - Returns: An iterator of list of Verses
     public func searchIterator(_ string: String, version: Version, chunks: Int = 10, surround: (String, String)? = nil) -> AnyIterator<[Verse]> {
         return bibleContainer.searchIterator(string, version: version, chunks: chunks, surround: surround)
     }

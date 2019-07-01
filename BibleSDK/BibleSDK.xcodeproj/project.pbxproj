@@ -287,10 +287,10 @@
 		4BC6D878227A119600FF0A03 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4BC6D87C227A120100FF0A03 /* Verse.swift */,
-				4BC6D87F227A12C700FF0A03 /* Book.swift */,
-				4B0871B5228C6F1C00621C5E /* Version.swift */,
 				4B8AFF8922849D8000D55F7D /* Bible.swift */,
+				4BC6D87F227A12C700FF0A03 /* Book.swift */,
+				4BC6D87C227A120100FF0A03 /* Verse.swift */,
+				4B0871B5228C6F1C00621C5E /* Version.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

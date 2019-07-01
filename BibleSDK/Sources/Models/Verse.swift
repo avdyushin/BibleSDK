@@ -8,16 +8,26 @@
 
 import Foundation
 
+/// Bible single verse object
+///
+/// Each Bible Verse is referenced by Chapter index and Number index
+/// For example `John 3:16` has Chapter index `3` and Number index `16`
 public struct Verse: Hashable, Equatable {
 
     public typealias ChapterIndex = Int
     public typealias VerseIndex = Int
 
+    /// The identifier of the Book
     public let book: Book.BookId
+    /// The Book name
     public let bookName: String?
+    /// The Book abbreviation
     public let bookAlt: String?
+    /// The Verse chapter index in the Book
     public let chapter: ChapterIndex
+    /// The Verse number in the current Chapter
     public let number: VerseIndex
+    /// The Text of the Verse
     public let text: String
 }
 
@@ -36,6 +46,11 @@ extension Verse {
 
 public extension Verse {
 
+    /// A Location of the Verses
+    ///
+    /// Reference to the Chapter(s) and Verse Number(s)
+    ///
+    /// If it's a set of multiple Chapters that means reference to all verses from the given Chapters
     struct Location: Hashable, Equatable, CustomStringConvertible {
 
         public let chapters: IndexSet
@@ -48,27 +63,42 @@ public extension Verse {
         }
     }
 
+    /// A Raw Reference to the Verse inside Bible
+    ///
+    /// Contains string Book name as set of Locations
     struct RawReference: Hashable, Equatable {
 
+        /// Raw Book name string (can be in any locale, or even wrong)
         public let bookName: String
+        /// The Locations of Verses
         public let locations: Set<Location>
     }
 
+    /// A Verses Reference
+    ///
+    /// Contains a link to the Book and set of Locations of Verses
     struct Reference: Hashable, Equatable, Comparable, CustomStringConvertible {
 
+        /// A Book inside Bible
         public let book: Book
+        /// A set of Locations
         public let locations: Set<Location>
 
         static public func <(lhs: Reference, rhs: Reference) -> Bool {
             return lhs.book.id < rhs.book.id
         }
 
+        /// A Title of the Book
         public var title: String { return book.title }
 
+        /// A first Chapter index
         public var firstChapter: Int {
             return locations.first?.chapters.first ?? 1
         }
 
+        /// String representation of the Verse Reference
+        ///
+        /// For example: `Gen 1:1-10` or `2 Cor 1, 2`
         public var description: String {
 
             var locationStrings = [String]()

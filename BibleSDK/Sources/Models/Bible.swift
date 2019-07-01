@@ -5,18 +5,41 @@
 //  Created by Grigory Avdyushin on 09/05/2019.
 //
 
+// A Bible Protocol
 public protocol BibleProtocol {
+    /// A Version (Translation) of the Bible
     var version: Version { get }
+    /// A list of Books
     var books: [Book] { get }
+    /// Returns Book by given `name` if exists
+    /// - Parameter name: The name of the book
     func book(name: String) -> Book?
+    /// Returns Book by given `id` if exists
+    /// - Parameter id: The id of the book
     func book(id: Book.BookId) -> Book?
+    /// Returns Verses list by given Book identifier, Chapters set and Verses set
+    /// - Parameters:
+    ///     - bookId: The identifier of the book
+    ///     - chapters: The set of chapters indexes
+    ///     - verses: The set of verses indexes
     func verses(bookId: Book.BookId, chapters: IndexSet, verses: IndexSet) -> [Verse]
+    /// Returns count of search results for given search string
     func searchCount(_ string: String) -> Int
+    /// Returns search results for given string with offset and count
+    /// - Parameters:
+    ///     - string: The string pattern to search
+    ///     - offset: The offset of all search results
+    ///     - count: The count of search results to return
+    ///     - surround: The prefix and suffix string to surround search string in results
     func search(_ string: String, offset: Int, count: Int, surround: (String, String)?) -> [Verse]
+    /// Returns Book by given `id`
     subscript(id: Book.BookId) -> Book? { get }
+    /// Returns Book by given `name`
     subscript(name: String) -> Book? { get }
 }
 
+/// A Bible Reference
+/// Each Bible is referenced by Version and Verse Reference
 public struct BibleReference: Hashable, Comparable {
     public let version: Version
     public let reference: Verse.Reference
@@ -32,6 +55,7 @@ extension BibleProtocol {
     }
 }
 
+/// Internal implementaion of the BibleProtocol
 class Bible: BibleProtocol {
 
     let version: Version

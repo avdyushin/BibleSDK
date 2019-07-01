@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Helper object to work with Regular Expressions
 public struct Regex {
 
     private let expression: NSRegularExpression
