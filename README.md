@@ -5,10 +5,11 @@ BibleSDK is a simple framework to work with Bible texts on iOS and macOS platfor
 # Features
 
 - Multiple Bible translations support
-- Verses parser from raw string to Bible texts
-- Fast full text search
-- Daily verses
-- [WIP] Bible in one year daily readings
+- Raw string into Bible text
+- Fast Full Text Search support
+- Verse of The Day (Daily verses grouped by similar topic)
+- Build-in formatters for plain text, attributed string and HTML
+- [WIP] Bible in One Year (Based on Companion by Robert Roberts)
 
 # Installation
 Using Carthage:
@@ -23,12 +24,13 @@ $ carthage update
 ## Adding Bible Version/Translation
 
 BibleSDK uses SQLite3 as a books/texts storage.
-Schemas are described in this [repo](https://github.com/avdyushin/bible-docker-postgres).
+Schemas are described [here](https://github.com/avdyushin/bible-docker-postgres).
 
-Apart with base sql files here is addon virual table for full-text search support should be creates.
-Here is [example](https://github.com/avdyushin/BibleSDK/blob/master/Addons/rst_fts_verses.sql).
+An additional virual table for full-text search support required as you can find [here](https://github.com/avdyushin/BibleSDK/blob/master/Addons/rst_fts_verses.sql).
 
 ### Create database files
+
+Once you have all you `*.sql` files prepare it's time to create database file itself:
 
 ```sh
 sqlite3 niv.db < niv_bible_books.sql # books tables and data
@@ -53,13 +55,19 @@ try! bible.load(version: Version("niv"), filename: path)
 let versions = bible.availableVersion
 ```
 
+For now this SDK has `KJV` Bible as build-in one.
+
 ## Get Bible by Version
+
+Use subscript to get Bible by it's Version:
 
 ```swift
 let kjvBible = bible["kjv"]
 ```
 
 ## Get Book by Abbreviation
+
+The same for the Books:
 
 ```swift
 let kjvBible = bible["kjv"]
@@ -68,9 +76,13 @@ let genesis = kjvBible["gen"]
 
 ## Verses by string reference
 
+In order to get Bible text by only string reference like `Gen 1:1` use this method:
+
 ```swift
 let verses = bible.findByReference("Gen 1:1")
 ```
+
+It will return 1st verse for 1st chapter of Genses book as a Dictionary with Keys as Bible Version.
 
 ## Fetching Daily Verses
 
@@ -89,7 +101,7 @@ guard
     total > 0 else {
         return
 }
-// Create iterator on search results with 10 item by fetch
+// Create iterator on search results with 10 items by fetch
 let iterator = bible.searchIterator(
     string,
     version: version,
