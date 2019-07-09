@@ -148,6 +148,8 @@ class BibleSDK_iOS_Tests: XCTestCase {
         XCTAssertNoThrow(try b.bibleContainer.load(version: Version("rst"), path: path))
         let verses = b.findByReference("Gen 1:1 Быт 1:1")
         XCTAssertEqual(verses.keys.count, 2)
+        XCTAssertEqual(verses.first!.value.first?.bookAlt, "Gen")
+        XCTAssertEqual(verses.first!.value.first?.bookName, "Genesis")
     }
 
     func testFetchByRefsNotFound() {

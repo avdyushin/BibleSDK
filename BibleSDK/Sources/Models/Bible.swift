@@ -178,9 +178,10 @@ class Bible: BibleProtocol {
         let query =
         """
         SELECT
-            book_id, verse, chapter, text
+            a.book_id, a.verse, a.chapter, a.text, b.book as book_name, b.alt as book_alt
         FROM
-            \(version.identifier)_bible
+            \(version.identifier)_bible a
+        LEFT OUTER JOIN \(version.identifier)_bible_books b on (a.book_id = b.id)
         WHERE
             \(condition);
         """
