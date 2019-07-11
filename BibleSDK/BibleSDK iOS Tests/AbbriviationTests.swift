@@ -78,6 +78,14 @@ class AbbriviationTests: XCTestCase {
         XCTAssertEqual(results.first?.locations.first?.verses, [3, 4, 5, 6])
     }
 
+    func testMatchBook1ChapterInvalidVerseRange() {
+        let results = abbreviation.matches("Gen 1:6-3")
+        XCTAssertEqual(results.count, 1)
+        XCTAssertEqual(results.first?.bookName, "Gen")
+        XCTAssertEqual(results.first?.locations.first?.chapters, [1])
+        XCTAssertEqual(results.first?.locations.first?.verses, [6])
+    }
+
     func testMatchBookWithPrefixAndSpaceVerseRange() {
         let results = abbreviation.matches("3 King 1:3-4")
         XCTAssertEqual(results.count, 1)
@@ -99,6 +107,13 @@ class AbbriviationTests: XCTestCase {
         XCTAssertEqual(results.count, 1)
         XCTAssertEqual(results.first?.bookName, "Gen")
         XCTAssertEqual(results.first?.locations.first?.chapters, [1, 2, 3])
+    }
+
+    func testMatchBookChaptersInvalidRange() {
+        let results = abbreviation.matches("Gen 3-1")
+        XCTAssertEqual(results.count, 1)
+        XCTAssertEqual(results.first?.bookName, "Gen")
+        XCTAssertEqual(results.first?.locations.first?.chapters, [3])
     }
 
     func testMatchBookChaptersSequence() {

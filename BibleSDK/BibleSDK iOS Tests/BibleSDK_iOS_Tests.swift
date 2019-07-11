@@ -19,7 +19,6 @@ import XCTest
 
 class BibleSDK_iOS_Tests: XCTestCase {
 
-
     func testVersion() {
         let v: Version = "kjv"
         XCTAssertEqual(v.identifier, "kjv")
@@ -96,7 +95,7 @@ class BibleSDK_iOS_Tests: XCTestCase {
     func testRSTDailyReading() {
         let b = BibleSDK()
         let path = Bundle(for: type(of: self)).path(forResource: "rst", ofType: "db")!
-        XCTAssertNoThrow(try b.bibleContainer.load(version: Version("rst"), path: path))
+        XCTAssertNoThrow(try b.bibleContainer.load(version: Version("rst:ru"), path: path))
         let v = b.bibleContainer.availableVersions.first { $0.identifier == "rst" }!
         let reading = b.dailyReading(Date(timeIntervalSince1970: 123123123), version: v)
         XCTAssertEqual(reading.keys.count, 13)
@@ -148,8 +147,14 @@ class BibleSDK_iOS_Tests: XCTestCase {
         XCTAssertNoThrow(try b.bibleContainer.load(version: Version("rst"), path: path))
         let verses = b.findByReference("Gen 1:1 Быт 1:1")
         XCTAssertEqual(verses.keys.count, 2)
-        XCTAssertEqual(verses.first!.value.first?.bookAlt, "Gen")
-        XCTAssertEqual(verses.first!.value.first?.bookName, "Genesis")
+    }
+
+    func testFetchByRefBookNames() {
+        let b = BibleSDK()
+        let verses = b.findByReference("Gen 1:1")
+        let first = verses.first!.value.first!
+        XCTAssertEqual(first.bookAlt, "Gen")
+        XCTAssertEqual(first.bookName, "Genesis")
     }
 
     func testFetchByRefsNotFound() {
@@ -175,8 +180,8 @@ class BibleSDK_iOS_Tests: XCTestCase {
     }
 
     func testBibleSubscript() {
-        let bibles = BibleSDK()
-        let kjvBible = bibles["kjv"]!
+        let b = BibleSDK()
+        let kjvBible = b["kjv"]!
         let genesisBook = kjvBible["gen"]
         XCTAssertEqual(genesisBook?.title, "Genesis")
     }

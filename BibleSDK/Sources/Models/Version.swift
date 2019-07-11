@@ -14,7 +14,7 @@ public struct Version: Hashable, ExpressibleByStringLiteral {
 
     /// An identifier of the Version
     ///
-    /// Examples of identifies:
+    /// Examples of identifiers:
     /// - `KJV:en_US`
     /// - `RST:ru_RU`
     public let identifier: String

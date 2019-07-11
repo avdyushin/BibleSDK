@@ -20,9 +20,9 @@ public struct Verse: Hashable, Equatable {
     /// The identifier of the Book
     public let book: Book.BookId
     /// The Book name
-    public let bookName: String?
+    public let bookName: String
     /// The Book abbreviation
-    public let bookAlt: String?
+    public let bookAlt: String
     /// The Verse chapter index in the Book
     public let chapter: ChapterIndex
     /// The Verse number in the current Chapter
@@ -35,8 +35,8 @@ extension Verse {
     init(row: Row) {
         self.init(
             book: row["book_id"]!,
-            bookName: row["book_name"],
-            bookAlt: row["book_alt"],
+            bookName: row["book_name"]!,
+            bookAlt: row["book_alt"]!,
             chapter: row["chapter"]!,
             number: row["verse"]!,
             text: row["text"]!

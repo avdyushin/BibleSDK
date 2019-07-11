@@ -63,7 +63,7 @@ public struct BibleAbbreviation: Abbreviation {
             let chapterNextValue: Int? = $0.resultValue(string, withName: "ChapterNext")
 
             var chapters: IndexSet = [chapterValue]
-            if let chapterEndValue = chapterEndValue {
+            if let chapterEndValue = chapterEndValue, chapterEndValue > chapterValue {
                 chapters.insert(integersIn: chapterValue...chapterEndValue)
             }
             if let chapterNextValue = chapterNextValue {
@@ -77,7 +77,7 @@ public struct BibleAbbreviation: Abbreviation {
             var verses: IndexSet = []
             if let verseValue = verseValue {
                 verses = [verseValue]
-                if let verseEndValue = verseEndValue {
+                if let verseEndValue = verseEndValue, verseEndValue > verseValue {
                     verses.insert(integersIn: verseValue...verseEndValue)
                 }
                 if let verseNextValue = verseNextValue {
