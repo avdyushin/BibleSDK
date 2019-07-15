@@ -25,7 +25,7 @@ public struct BibleAbbreviation: Abbreviation {
 
     public static let AbbreviationPattern =
         "(?<Book>(([1234]|I{1,4})[\\t\\f\\p{Z}]*)?\\p{Word}+\\.?)[\\t\\f\\p{Z}]+" +
-        "(?<Locations>(\(BibleAbbreviation.LocationPattern)\\s?)+)"
+        "(?<Locations>(\(BibleAbbreviation.LocationPattern)[\\t\\f\\p{Z}]?)+)"
 
     private let abbreviationsRegex: Regex
     private let locationsRegex: Regex

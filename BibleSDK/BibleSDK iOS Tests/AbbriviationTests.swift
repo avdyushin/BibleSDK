@@ -160,11 +160,31 @@ class AbbriviationTests: XCTestCase {
     func testMultiline() {
         let results = abbreviation.matches(
             """
-                10:22 Here is my notes
-                1:2 this is one
-                2:3 this is two
+            10:22 Here is my notes
+            1:2 this is one
+            2:3 this is two
             """
         )
         XCTAssertTrue(results.isEmpty)
+    }
+
+    func testMultilineWithNumericBookPrefix() {
+        let results = abbreviation.matches(
+            """
+            Some notes header goes here
+
+            1 Cor 1:1
+            2 Cor 1:1
+
+            The rest of notes
+            """
+        )
+        XCTAssertEqual(2, results.count)
+        XCTAssertEqual(results.first?.bookName, "1 Cor")
+        XCTAssertEqual(results.first?.locations.first?.chapters, [1])
+        XCTAssertEqual(results.first?.locations.first?.verses, [1])
+        XCTAssertEqual(results.last?.bookName, "2 Cor")
+        XCTAssertEqual(results.last?.locations.first?.chapters, [1])
+        XCTAssertEqual(results.last?.locations.first?.verses, [1])
     }
 }
