@@ -43,43 +43,32 @@ public class BibleSDK {
 
     /// Returns Daily Reading Verses for given date and version
     /// - Parameters:
-    ///     - data: The date to return daily reading
+    ///     - date: The date to return daily reading
     ///     - version: The Bible Version to fetch daily reading from
     public func dailyReading(_ date: Date = Date(), version: Version) -> VerseByReference  {
-        let references = dailyContainer
-            .dailyReferences(date)
-            .reduce([], { $0.contains($1) ? $0 : $0 + [$1] })
-            .compactMap { bibleContainer.references(raw: $0, version: version) }
-
-        guard !references.isEmpty else {
-            assertionFailure()
-            return [:]
-        }
-
-        let verses = references
-            .map { bibleContainer.verses(reference: $0.reference, version: version) }
-            .filter { !$0.isEmpty }
-
-        return Dictionary(uniqueKeysWithValues: zip(references, verses))
+        return buildDictionary(dailyContainer.dailyReferences(date), version: version)
     }
 
     /// Returns Verses by given Bible string reference
     /// - Parameter string: A Bible string reference like `Gen 1:1-2`
     public func findByReference(_ string: String) -> VerseByReference {
-        let references = abbreviation
-            .matches(string)
-            .reduce([], { $0.contains($1) ? $0 : $0 + [$1] })
-            .compactMap { bibleContainer.references(raw: $0) }
+        return buildDictionary(abbreviation.matches(string))
+    }
 
+    func buildDictionary(_ references: [Verse.RawReference], version: Version? = nil) -> VerseByReference {
         guard !references.isEmpty else {
             return [:]
         }
 
+        let references = references
+            .reduce([], { $0.contains($1) ? $0 : $0 + [$1] })
+            .compactMap { bibleContainer.references(raw: $0, version: version) }
+
         let verses = references
             .map { bibleContainer.verses(reference: $0.reference, version: $0.version) }
-            .filter { !$0.isEmpty }
 
         return Dictionary(uniqueKeysWithValues: zip(references, verses))
+            .filter { !$0.value.isEmpty }
     }
 
     /// Returns Verses by given book, chapter(s) and verses numbers
@@ -113,7 +102,7 @@ public class BibleSDK {
     ///     - string: A search string
     ///     - version: A Bible Version
     ///     - chunks: A number of batch items to fetch in one call
-    ///     - surround: A prefix and suffix to surrdoun search string in results
+    ///     - surround: A prefix and a suffix to surrdoun search string in results
     /// - Returns: An iterator of list of Verses
     public func searchIterator(_ string: String, version: Version, chunks: Int = 10, surround: (String, String)? = nil) -> AnyIterator<[Verse]> {
         return bibleContainer.searchIterator(string, version: version, chunks: chunks, surround: surround)

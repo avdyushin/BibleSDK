@@ -32,4 +32,13 @@ class DailyContainerTests: XCTestCase {
         let conv = refs.map { sdk.bibleContainer.references(raw: $0) }
         XCTAssertEqual(refs.count, conv.count)
     }
+
+    func testMapRefsToVerses() {
+        let c = DateComponents(calendar: Calendar.current, year: 2019, month: 9, day: 19)
+        let date = Calendar.current.date(from: c)!
+        let dict = sdk.dailyReading(date, version: "kjv")
+        for (key, value) in dict {
+            XCTAssertEqual(key.reference.book.id, value.first!.book)
+        }
+    }
 }
